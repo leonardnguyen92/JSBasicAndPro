@@ -19,6 +19,49 @@ Phù hợp cho người mới bắt đầu và cả những ai muốn củng c�
 
 ---
 
+## 📆 Lộ trình học (gợi ý 4 tuần)
+
+| Tuần | Nội dung chính                                | Thư mục                               |
+| ---- | --------------------------------------------- | ------------------------------------- |
+| 1    | Cơ bản JS, biến, toán tử, điều kiện, vòng lặp | `01-basics/`                          |
+| 2    | Hàm, mảng, object, callback                   | `02-functions/`, `03-arrays-objects/` |
+| 3    | DOM, sự kiện, thao tác form                   | `04-dom-events/`                      |
+| 4    | Mini projects, async JS, tổng ôn              | `05-mini-projects/`                   |
+
+> Bạn có thể linh hoạt theo tốc độ học cá nhân.
+
+---
+
+## 🧪 Gợi ý bài tập
+
+### 🔹 Tuần 1: Cơ bản
+
+- Viết chương trình tính tổng 2 số.
+- Kiểm tra số chẵn/lẻ.
+- Tính giai thừa, kiểm tra số nguyên tố.
+- In bảng cửu chương.
+
+### 🔹 Tuần 2: Hàm & mảng
+
+- Viết hàm tính trung bình cộng mảng số.
+- Viết hàm tìm phần tử lớn nhất trong mảng.
+- Sử dụng `map`, `filter`, `reduce` với dữ liệu mảng.
+
+### 🔹 Tuần 3: DOM & sự kiện
+
+- Tạo một form đăng ký đơn giản.
+- Tạo nút "Bấm để đổi màu nền".
+- Viết đồng hồ đếm ngược (countdown timer).
+
+### 🔹 Tuần 4: Dự án nhỏ
+
+- ✅ To-do list có thể thêm/xoá/sửa công việc.
+- ✅ Máy tính đơn giản (calculator).
+- ✅ Đồng hồ kỹ thuật số.
+- ✅ Ứng dụng thời tiết (dùng fetch API nếu muốn mở rộng).
+
+---
+
 ## 📁 Cấu trúc thư mục
 
 ```plaintext
@@ -37,7 +80,10 @@ Bạn cũng có thể mở bằng Visual Studio Code + Live Server để tiện 
 
 👨‍💻 Tác giả
 Nguyễn Hoàn
-Liên hệ: Github • Email (thêm nếu muốn)
+
+📫 Github: https://github.com/leonardnguyen92
+📧 Email: leonardnguyen92@gmail.com
+
 
 📄 Giấy phép
 Dự án được chia sẻ theo giấy phép MIT.
