@@ -1,0 +1,43 @@
+body {
+    background-color: #f8f9fa;
+}
+
+header {
+    height: 72px;
+}
+
+aside {
+    position: sticky;
+    top: 72px;
+    /* chiều cao header */
+    height: fit-content;
+    max-height: calc(100vh - 72px);
+    /* trừ header và footer */
+    overflow-y: auto;
+    align-self: flex-start;
+}
+
+.row {
+    align-items: flex-start;
+    position: relative;
+}
+
+aside a {
+    color: white;
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+}
+
+aside a:hover {
+    background-color: #689ed4;
+}
+
+main {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+}
+
+.content-wrapper {
+    margin-top: 0;
+}
