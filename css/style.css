@@ -1,43 +1,126 @@
 body {
-    background-color: #f8f9fa;
+    padding-top: 80px;
 }
 
-header {
-    height: 72px;
-}
-
-aside {
-    position: sticky;
-    top: 72px;
-    /* chiều cao header */
-    height: fit-content;
-    max-height: calc(100vh - 72px);
-    /* trừ header và footer */
-    overflow-y: auto;
-    align-self: flex-start;
-}
-
-.row {
-    align-items: flex-start;
-    position: relative;
-}
-
-aside a {
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    /* cố định chiều cao */
+    background-color: #343a40;
     color: white;
-    display: block;
-    padding: 12px 20px;
-    text-decoration: none;
+    padding: 0 1rem;
+    /* chỉ padding ngang */
+    line-height: 80px;
+    /* canh giữa chữ dọc */
+    z-index: 1030;
+    /* Thêm Flexbox để căn giữa */
+    display: flex;
+    justify-content: center;
+    /* căn giữa ngang */
+    align-items: center;
+    /* căn giữa dọc */
 }
 
-aside a:hover {
-    background-color: #689ed4;
+.header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* Sidebar cố định */
+.fixed-sidebar {
+    position: fixed;
+    top: 80px;
+    left: calc((100% - 1140px) / 2);
+    /* tính từ .container width mặc định */
+    width: 285px;
+    /* col-md-3 của container 1140px = ~285px */
+    height: calc(100vh - 80px);
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-y: auto;
+    z-index: 1020;
+}
+
+.fixed-sidebar .nav-link {
+    color: #343a40;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.fixed-sidebar .nav-link:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.content {
+    padding: 1rem;
+    margin-left: 285px;
+    /* thêm dòng này */
+
 }
 
 main {
-    padding-top: 1rem;
-    padding-bottom: 3rem;
+    margin-left: 285px;
 }
 
-.content-wrapper {
-    margin-top: 0;
+h3 {
+    color: #f10a16;
+}
+
+@media (max-width: 1200px) {
+    .fixed-sidebar {
+        left: 15px;
+        /* fallback cho container nhỏ hơn */
+    }
+}
+
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+    }
+}
+
+table,
+tr,
+th,
+td {
+    border: 1px solid;
+}
+
+th {
+    text-align: center;
+}
+
+.noteSpan {
+    background-color: #ffff00;
+}
+
+.syntaxCode {
+    background-color: rgb(30, 30, 30);
+    overflow-x: auto;
+    overflow-y: auto;
+    font-size: 16px;
+    line-height: 22px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.colorWhite {
+    color: white;
+}
+
+.colorAqua {
+    color: aqua;
+}
+
+.colorGold {
+    color: gold;
+}
+
+.colorBlue {
+    color: #0b56c7;
 }

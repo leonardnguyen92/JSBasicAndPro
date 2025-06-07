@@ -1,35 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Javascript Array ForEach Method</title>
-    <!-- Link Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    <!-- Link Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Link Javascript Local-->
+    <script src="main.js"></script>
+    <!-- Link CSS Internal-->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
 <body>
-    <div class="container">
-        <header>
-            <h1 style="text-align: center;">The forEach() method of arrays in JavaScript</h1>
-        </header>
-        <div class="main">
-            <div class="definition">
-                <p>This is definition</p>
-            </div>
-            <div class="syntax">
-                <p>This is syntax</p>
-            </div>
-            <div class="summary">
-                <p>This is summary</p>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="text-center">The forEach() Method Of Arrays In JavaScript</h1>
+        </div>
+    </header>
+
+    <!-- Sidebar cố định nằm ngoài luồng layout -->
+    <div class="fixed-sidebar">
+        <h5>Menu</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#">Tổng quan</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Cơ bản</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Nâng cao</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Ví dụ</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Tài nguyên học tập</a></li>
+        </ul>
+    </div>
+
+    <!-- Main content với chỗ giữ layout col-3 -->
+    <main class="mt-0">
+        <div class="container">
+            <div class="row">
+                <!-- Placeholder giữ layout (trống) -->
+                <div class="col-md-3 d-none d-md-block"></div>
+
+                <!-- Nội dung chính -->
+                <section class="col-md-9 content">
+                    <div id="example">
+                        <h3>Tổng quan</h3>
+
+                        <h3>🔰 Cơ Bản (Fundamentals)</h3>
+                        <ul>
+                            <li>Khai báo biến: <code>let</code>, <code>const</code>, <code>var</code></li>
+                            <li>Kiểu dữ liệu: Number, String, Boolean, Object, Array, v.v.</li>
+                            <li>Câu lệnh điều kiện: <code>if</code>, <code>switch</code></li>
+                            <li>Vòng lặp: <code>for</code>, <code>while</code>, <code>forEach</code></li>
+                            <li>Hàm: Hàm thường và arrow function</li>
+                            <li>Thao tác DOM: <code>document.getElementById()</code>, v.v.</li>
+                        </ul>
+                    </div>
+
+                    <div id="testScroll">
+                        <p style="height: 2000px;">(Nội dung dài để test scroll)</p>
+                    </div>
+                </section>
             </div>
         </div>
-        <footer class="bg-dark text-center text-white p-3">
-            <p class="mb-0">This is footer.</p>
-        </footer>
-    </div>
-    <!-- Link Bootstrap JS (tuỳ chọn nếu cần tính năng động như dropdown, modal...) -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3">
+        &copy; 2025 - Thiết kế bởi Bạn
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

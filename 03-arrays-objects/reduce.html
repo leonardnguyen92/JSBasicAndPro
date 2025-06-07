@@ -1,81 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Javascript Array Reduce Method</title>
     <!-- Link Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        header {
-            height: 72px;
-        }
-
-        .main {
-            /* min-height: 100vh; */
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 72px;
-            /* Chiều cao của header */
-            /* left: 0; */
-            /* width: 240px; */
-            /* Chiều rộng cố định cho sidebar */
-            height: calc(100vh - 72px);
-            /* Chiếm phần còn lại của màn hình */
-            overflow-y: auto;
-            background-color: #f1f1f1;
-            /* border-right: 1px solid #ccc; */
-            padding: 1rem;
-            z-index: 1000;
-        }
-
-        .main-content {
-            padding: 2rem;
-            margin-left: 240px;
-            /* Bằng chiều rộng của sidebar */
-            overflow-y: auto;
-        }
-    </style>
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Link Javascript Local-->
+    <script src="main.js"></script>
+    <!-- Link CSS Internal-->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
 <body>
-    <header class="sticky-top">
-        <h1 class="bg-primary text-white text-center p-3">The reduce() method of arrays in Javascript</h1>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="text-center">The Reduce() Method Of Arrays In Javascript</h1>
+        </div>
     </header>
-    <div class="main">
+
+    <!-- Sidebar cố định nằm ngoài luồng layout -->
+    <div class="fixed-sidebar">
+        <h5>Menu</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#define">Phương thức <code>reduce()</code> là gì?</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Cú pháp</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Callback trong reduce()</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Ví dụ</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Tổng kết</a></li>
+        </ul>
+    </div>
+
+    <!-- Main content với chỗ giữ layout col-3 -->
+    <main class="mt-0">
         <div class="container">
             <div class="row">
-                <nav class="col-md-3 col-lg-2 sidebar">
-                    <ul class="nav flex-column">
-                        <li class="nav-item"><a href="#" class="nav-link">Phương thức <code>reduce()</code> là gì?</a>
-                        </li>
-                        <li class="nav-item"><a href="#" class="nav-link">Cú pháp</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Ví dụ</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Tổng kết</a></li>
-                    </ul>
-                </nav>
-                <main class="col-md-9 col-lg-10 main-content bg-white">
-                    <h2>Tổng quan</h2>
-                    <p>Nội dung chính ở đây...</p>
-                    <p>Cuộn xuống để kiểm tra sidebar không bị trượt.</p>
-                    <div style="height: 1500px;"></div>
-                </main>
+                <!-- Placeholder giữ layout (trống) -->
+                <div class="col-md-3 d-none d-md-block"></div>
+
+                <!-- Nội dung chính -->
+                <section class="col-md-9 content">
+                    <div id="define">
+                        <h3>Phương thức reduce() là gì?</h3>
+                        <p>Phương thức reduce() là:</p>
+                        <ul>
+                            <li>Phương thức giảm mảng xuống thành một giá trị duy nhất.</li>
+                            <li>Phương thức reduce() thực thi một hàm được cung cấp cho mỗi giá trị của mảng (từ trái
+                                sang phải).</li>
+                            <li>Giá trị trả về của hàm được lưu trữ trong bộ tích luỹ (kết quả / tổng).</li>
+                        </ul>
+                        <p><span class="noteSpan">Lưu ý #1:</span> reduce() không thực thi hàm đối với các phần tử mảng
+                            không có giá trị.</p>
+                        <p><span class="noteSpan">Lưu ý #2:</span> Phương thức này không thay đổi mảng ban đầu.</p>
+                    </div>
+                    <div class="syntax">
+                        <p>Cú pháp đơn giản của phương thức reduce():</p>
+                        <div class="syntaxCode">
+                            <br>
+                            <span class="colorAqua">arr</span><span class="colorWhite">.</span><span
+                                class="colorGold">reduce<span class="colorWhite">(</span></span><span
+                                class="colorAqua">reducer<span class="colorWhite">,</span>initialValue</span> <span
+                                class="colorWhite">);</span>
+                            <br>
+                            <br>
+                        </div>
+                        <br>
+                        <p><span class="noteSpan">Lưu ý #3:</span> initialValue (giá trị khởi tạo) là tuỳ chọn. Nếu bạn
+                            truyền vào đối số khởi tạo, phương thức reducer() sử dụng nó ở lần gọi đầu tiên.</p>
+                        <p>Reduce đi kèm với một số thuật nữ như <code>reducer</code> và <code>accumulator</code>. Trong
+                            đó:</p>
+                        <ul>
+                            <li><code>accumulator</code> là giá trị mà chúng ta nhận được khi phương thức kết thúc</li>
+                            <li><code>reducer</code> là hành động mà chúng ta sẽ thực hiện để đạt được <b>một giá
+                                    trị</b>.</li>
+                        </ul>
+                        <p>Một phương thức reduce() sẽ chỉ trả về một giá trị duy nhất, do đó nó tên là reduce.</p>
+                    </div>
+                    <div id="callbackMethod">
+                        <p>Hàm callback (reducer) này có bốn đối số:</p>
+                        <div class="syntaxCode">
+                            <br>
+                            <span class="colorBlue">function</span> <span class="colorGold">reduce</span> <span
+                                class="colorWhite">(<span class="colorAqua">accumulator</span>, <span
+                                    class="colorAqua">currentValue</span>,<span class="colorAqua">curentIndex</span>,
+                                <span class="colorAqua">array</span>)
+                                {}</span>
+                            <br><br>
+                        </div>
+                        <p>Trong đó:</p>
+                        <ul>
+                            <li><code>accumulator</code>: Bắt buộc. Giá trị được trả về từ lần gọi trước. Nếu truyền giá
+                                trị khởi tạo cho phương thức reduce(), khi hàm callback này được thực thi lần đầu tiên,
+                                accumulator bằng giá trị khởi tạo.</li>
+                            <li><code>currentValue</code>: Bắt buộc. Giá trị của phần tử mảng trong lần lặp hiện tại.
+                            </li>
+                            <li><code>curentIndex</code>: Tuỳ chọn. Chỉ số của phần tử mảng trong lần lặp hiện tại.</li>
+                            <li><code>arr</code>: Tuỳ chọn. Mảng mà phương thức reduce() gọi và áp dụng hàm callback
+                                trên từng phần tử của nó.</li>
+                        </ul>
+                        <p>Hàm reducer này thực thi trên mỗi phần tử và trả về một giá trị. Giá trị trả về này được gán
+                            cho đối số tích luỹ (accumulator) trong mỗi lần lặp.</p>
+                        <p>Ở lần lặp cuối cùng, giá trị của <code>accumulator</code> trở thành giá trị kết quả duy nhất.
+                        </p>
+                    </div>
+                    <div id="testScroll">
+                        <p style="height: 2000px;">(Nội dung dài để test scroll)</p>
+                    </div>
+                </section>
             </div>
         </div>
-    </div>
-    <footer class="bg-dark text-center text-white p-3">
-        <p class="mb-0">This is footer.</p>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3">
+        &copy; 2025 - Thiết kế bởi Bạn
     </footer>
-    <!-- Link Bootstrap JS (tuỳ chọn nếu cần tính năng động như dropdown, modal...) -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

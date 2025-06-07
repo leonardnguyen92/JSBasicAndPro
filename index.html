@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>JavaScript: From Basics to Advanced</title>
     <!-- Link Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Link Javascript Local-->
     <script src="main.js"></script>
     <!-- Link CSS Internal-->
@@ -15,63 +15,296 @@
 </head>
 
 <body>
-    <header class="sticky-top">
-        <h1 class="bg-primary text-white text-center p-3">Complete Guide to Basic and Advanced JavaScript</h1>
-    </header>
-    <div class="container content-wrapper">
-        <div class="row">
-            <!-- SIDEBAR -->
-            <aside class="col-md-3 col-lg-2 bg-light p-3" aria-label="JavaScript Menu">
-                <h5 class="text-center mb-3 mt-3">JavaScript Menu</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a href="#" class="nav-link text-dark">Tổng quan</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-dark">Cơ bản</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-dark">Nâng cao</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-dark">Ví dụ</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-dark">Tài nguyên học</a></li>
-                </ul>
-            </aside>
-            <main class="col-md-9 col-lg-10 p-4 bg-white">
-                <h2>Tổng quan</h2>
 
-                <h4>🔰 Cơ Bản (Fundamentals)</h4>
-                <ul>
-                    <li>Khai báo biến: <code>let</code>, <code>const</code>, <code>var</code></li>
-                    <li>Kiểu dữ liệu: Number, String, Boolean, Object, Array, v.v.</li>
-                    <li>Câu lệnh điều kiện: <code>if</code>, <code>switch</code></li>
-                    <li>Vòng lặp: <code>for</code>, <code>while</code>, <code>forEach</code></li>
-                    <li>Hàm: Hàm thường và arrow function</li>
-                    <li>Thao tác DOM: <code>document.getElementById()</code>, v.v.</li>
-                </ul>
-
-                <h4>🚀 Nâng Cao (Advanced)</h4>
-                <ul>
-                    <li>Promise, Callback, Async/Await</li>
-                    <li>Closure, Scope, Hoisting</li>
-                    <li>ES6+: Destructuring, Spread, Template Literals, Optional Chaining</li>
-                    <li>OOP: Class, Constructor, Inheritance</li>
-                    <li>Module: <code>import</code> / <code>export</code></li>
-                    <li><a href="03-arrays-objects\reduce.html" target="_blank" rel="noopener noreferrer">Test link
-                            CSS</a></li>
-                </ul>
-
-                <h5>📚 Tài nguyên học tập</h5>
-                <ul>
-                    <li><a href="https://www.w3schools.com/js/" target="_blank">W3Schools - JavaScript Basics</a>
-                    </li>
-                    <li><a href="https://javascript.info/" target="_blank">JavaScript.info</a></li>
-                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN Web
-                            Docs</a></li>
-                </ul>
-
-                <p>(Cuộn xuống để thấy sticky hoạt động)</p>
-                <div style="height: 2500px;"></div>
-            </main>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="text-center">Complete Guide to Basic and Advanced JavaScript</h1>
         </div>
+    </header>
+
+    <!-- Sidebar cố định nằm ngoài luồng layout -->
+    <div class="fixed-sidebar">
+        <h5>Menu</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#">Tổng quan</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Cơ bản</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Nâng cao</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Ví dụ</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Tài nguyên học tập</a></li>
+        </ul>
     </div>
-    <footer class="bg-dark text-center text-white p-3">
-        <p class="mb-0">This is footer.</p>
+
+    <!-- Main content với chỗ giữ layout col-3 -->
+    <main class="mt-0">
+        <div class="container">
+            <div class="row">
+                <!-- Placeholder giữ layout (trống) -->
+                <div class="col-md-3 d-none d-md-block"></div>
+
+                <!-- Nội dung chính -->
+                <section class="col-md-9 content">
+                    <div id="define">
+                        <h3>JavaScript là gì?</h3>
+                        <p>JavaScript, còn được viết tắt là JS, là một ngôn ngữ lập trình, chạy dưới dạng ngôn ngữ kịch
+                            bản
+                            phía máy khách trong môi trường hosting. Môi trường hosting phổ biến nhất là trình duyệt
+                            web,
+                            dùng ngôn ngữ này để tạo tính tương tác cho trang web.</p>
+                        <p>JavaScript được phát triển vào những năm 1990 bởi Brendan Eich - người cũng là co-founder của
+                            Mozilla & Firefox. Kể từ đó, ngôn ngữ này trở thành một trong những công nghệ cốt lõi duy
+                            trì
+                            World Wide Web.</p>
+                        <h4>Các đặc điểm của ngôn ngữ lập trình JavaScript</h4>
+                        <ul>
+                            <li>Là ngôn ngữ kịch bản (scripting language) hướng đối tượng.</li>
+                            <li>Là ngôn ngữ nhập động (dynamic typing) dựa trên prototype.</li>
+                            <li>Là ngôn ngữ lightweight (dễ học và viết code nhanh).</li>
+                            <li>Là ngôn ngữ đa mô hình (multi-paradigm) và đơn luồng (single threaded).</li>
+                        </ul>
+                    </div>
+
+                    <div id="jswork">
+                        <h3>Phương thức hoạt động</h3>
+                        <p>Mã JavaScript được thông dịch trực tiếp sang ngôn ngữ máy cơ bản bằng công cụ JavaScript.</p>
+                        <h4>Máy khách (client-side)</h4>
+                        <p>Công cụ JavaScript được tích hợp sẵn bên trong hầu hết các trình duyệt web phổ biến.</p>
+                        <ul>
+                            <li>Trình duyệt thực hiện tải trang web khi có người truy cập.</li>
+                            <li>Trình duyệt chuyển đổi trang web đó và tất cả các phần tử của nó (button, nhẫn dán, hộp
+                                thả xuống, ...) thành dạng cấu trúc dữ liệu gọi là DOM (tạm dịch: Mô hình Đối tượng Tài
+                                liệu).</li>
+                            <li>Công cụ JavaScript của trình duyệt thực hiện chuyển mã JavaScript thành mã byte.</li>
+                            <li>Khi có sự kiện xảy ra, ví dụ như nhấp vào button, việc thực thi code block JavaScript
+                                liên kết sẽ kích hoạt.</li>
+                            <li>Công cụ JavaScript diễn giải mã byte và tạo thay đổi đối với DOM.</li>
+                            <li>Trình duyệt hiển thị DOM mới.</li>
+                        </ul>
+                        <h4>Máy chủ (server-side)</h4>
+                        <p>Công cụ JavaScript nằm trực tiếp trên server. JavaScript phía máy chủ có thể thực hiện:</p>
+                        <ul>
+                            <li>Truy cập cơ sở dữ liệu.</li>
+                            <li>Thực hiện các tính toán logic khác nhau.</li>
+                            <li>Phản hồi các sự kiện khác nhau do hệ điều hành của máy chủ kích hoạt</li>
+                        </ul>
+                    </div>
+
+                    <div id="uses">
+                        <h3>JavaScript được dùng để làm gì?</h3>
+                        <h4>Trang web sẽ thế nào nếu không có JavaScript?</h4>
+                        <p>Nếu không có JavaScript, trang web sẽ chỉ có HTML và CSS. Khi đó, 90% website sẽ ở dạng tĩnh
+                            như một cuốn sách.</p>
+                        <p>Ngôn ngữ lập trình này được tạo ra để web developer có thể nhúng mã thực thi vào trang web,
+                            cho phép trình duyệt web phản hồi tướng tác của người dùng và thay đổi bố cục, nội dung trên
+                            trang web như:</p>
+                        <ul>
+                            <li>Nút có thể nhấp vào, menu thả xuống.</li>
+                            <li>Nội dung bổ sung khi làm mới trang.</li>
+                            <li>Màu sắc của các phần tử thay đổi linh hoạt trên trang.</li>
+                        </ul>
+                        <h4>Vai trò của HTML-CSS-JavaScript</h4>
+                        <p>Tóm lại, vai trò của HTML-CSS-JavaScript được phân định như sau:</p>
+                        <ul>
+                            <li><b>HTML</b> xác định cấu trúc và nội dung của trang web.</li>
+                            <li><b>CSS</b> đặt cách trình bày và thiết kế giao diện trang web.</li>
+                            <li><b>JavaScript</b> bổ sung tính tương tác cho trang web, tạo ra các ứng dụng web phong
+                                phú hơn.</li>
+                        </ul>
+                    </div>
+                    <div id="applications">
+                        <h3>Ứng dụng nổi bật</h3>
+                        <ol>
+                            <li>Phát triển ứng dụng web</li>
+                            <li>Tạo tương tác cho trang web</li>
+                            <li>Phát triển ứng dụng di động</li>
+                            <li>Phát triển game</li>
+                            <li>Tạo bản trình bày</li>
+                            <li>Xây dựng ứng dụng web server và phát triển ứng dụng máy chủ</li>
+                            <li>Nghệ thuật</li>
+                            <li>Ứng dụng đồng hồ thông minh</li>
+                            <li>Robot bay</li>
+                        </ol>
+                    </div>
+                    <div id="characteristic">
+                        <h3>Ưu và nhược điểm của JavaScript</h3>
+                        <h4>Ưu điểm</h4>
+                        <ol>
+                            <li>Không cần bất kỳ thiết lập môi trường nào.</li>
+                            <li>Chạy cả trên máy khách và máy chủ.</li>
+                            <li>Chạy trên hầu hết mọi thiết bị.</li>
+                            <li>Cho phép phát triển cả front-end và back-end</li>
+                            <li>Có các phiên bản cập nhật thường xuyên.</li>
+                            <li>Có mã nguồn mở.</li>
+                            <li>Có nhiều framework & thư viện.</li>
+                        </ol>
+                        <h4>Nhược điểm</h4>
+                        <ol>
+                            <li>Rủi ro bảo mật.</li>
+                            <li>Hiệu suất.</li>
+                            <li>Độ phức tạp.</li>
+                        </ol>
+                    </div>
+                    <div id="libraryJS">
+                        <h3>Thư viện JavaScript cơ bản</h3>
+                        <p>Thư viện JavaScript là tập hợp các đoạn code viết sẵn mà developer có thể dùng lại để thực
+                            hiện các hàm JavaScript tiêu chuẩn.</p>
+                        <p>Các nhóm thư viện JavaScript cơ bản:</p>
+                        <h4>Thư viện Trực quan hoá dữ liệu</h4>
+                        <ul>
+                            <li>Ví dụ phổ biến: Chart.js, ApexCharts, Algolia Places...</li>
+                            <li>Dùng để: Tạo web hiển thị dữ liệu trong biểu đồ, bản đồ.</li>
+                        </ul>
+                        <h4>Thư viện thao tác DOM</h4>
+                        <ul>
+                            <li>Ví dụ phổ biến: jQuery, Umbrella JS</li>
+                            <li>Dùng để: Tạo các chức năng web như nút, menu động, thư viện ảnh, hộp đèn, v.v.</li>
+                        </ul>
+                        <h4>Thư viện biểu mẫu</h4>
+                        <ul>
+                            <li>Ví dụ phổ biến: wFForms, LiveValidation, Validanguage, qForms</li>
+                            <li>Dùng để: Tạo các chức năng biểu mẫu như xác thực biểu mẫu, bố cục, điều kiện và chuyển
+                                đổi.</li>
+                        </ul>
+                        <h4>Thư viện Hàm toán học và văn bản</h4>
+                        <ul>
+                            <li>Ví dụ phổ biến: Date.js, Sylvester, URL JavaScript</li>
+                            <li>Dùng để: xử lý một số yêu cầu toán học, ngày, giờ và văn bản ở phía máy khách, thay vì
+                                gửi tất cả yêu cầu đến máy chủ.</li>
+                        </ul>
+                    </div>
+                    <div id="frameworksJS">
+                        <h3>12 framework JavaScript phổ biến nhất</h3>
+                        <h4>Front-End JavaScript framework</h4>
+                        <ol>
+                            <li>React.js</li>
+                            <li>Angular</li>
+                            <li>Vue.js</li>
+                            <li>Next.js</li>
+                        </ol>
+                        <h4>Back-End JavaScript framework</h4>
+                        <ol>
+                            <li>Node.js</li>
+                            <li>Express.js</li>
+                            <li>Backbone.js</li>
+                            <li>Meteor.js</li>
+                        </ol>
+                        <h4>Framework JavaScript cho Mobile development</h4>
+                        <ol>
+                            <li>Electron.js</li>
+                            <li>React Native</li>
+                            <li>Cordova</li>
+                            <li>Expo</li>
+                        </ol>
+                    </div>
+                    <div id="compareWithJava">
+                        <h3>JavaScript có phải là Java không?</h3>
+                        <p>JavaScript có sự tương đồng về cú pháp với Java, giống như Java đối với C. Nhưng nó không
+                            phải là một tập hợp con của Java.</p>
+                        <p>JavaScript cũng tuân theo hầu hết cú pháp biểu thức Java, quy ước đặt tên và cấu trúc luồng
+                            điều khiển cơ bản, đó là lý do tại sao nó được đổi tên từ LiveScript thành JavaScript.</p>
+                        <p>Nhìn chung, lập trình Java phức tạp hơn lập trình JavaScript.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Java</th>
+                                    <th>JavaScript</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Là ngôn ngữ lập trình hướng đối tượng (object-oriented language)</td>
+                                    <td>Là ngôn ngữ kịch bản (scripting language)</td>
+                                </tr>
+                                <tr>
+                                    <td>Chủ yếu được sử dụng để phát triển các ứng dụng doanh nghiệp phức tạp</td>
+                                    <td>Chủ yếu được sử dụng để tạo các trang web động và tương tác</td>
+                                </tr>
+                                <tr>
+                                    <td>Dùng chủ yếu cho back-end</td>
+                                    <td>Dùng chủ yếu cho front-end</td>
+                                </tr>
+                                <tr>
+                                    <td>Chủ yếu là ngôn ngữ biên dịch</td>
+                                    <td>Chủ yếu là ngôn ngữ thông dịch</td>
+                                </tr>
+                                <tr>
+                                    <td>Là ngôn ngữ strong-typying: Các biến phải được khai báo trước</td>
+                                    <td>Là ngôn ngữ loose-tying: Các cú pháp và quy tắc thoải mái hơn</td>
+                                </tr>
+                                <tr>
+                                    <td>Các đối tượng của Java dựa trên lớp (class)</td>
+                                    <td>Các đối tượng của Java dựa trên mẫu (prototype)</td>
+                                </tr>
+                                <tr>
+                                    <td>Có thể chạy trong bất kỳ máy ảo (Java Virtual Machine) hoặc trình duyệt nào</td>
+                                    <td>Trước đây chỉ chạy trên trình duyệt, nhưng bây giờ có thể chạy trên máy chủ
+                                        thông qua Node.js</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="fundamentals">
+                        <h3>Cơ Bản (Fundamentals)</h3>
+                        <ul>
+                            <li>Khai báo biến: <code>let</code>, <code>const</code>, <code>var</code></li>
+                            <li>Kiểu dữ liệu: Number, String, Boolean, Object, Array, v.v.</li>
+                            <li>Câu lệnh điều kiện: <code>if</code>, <code>switch</code></li>
+                            <li>Vòng lặp: <code>for</code>, <code>while</code>, <code>forEach</code></li>
+                            <li>Hàm: Hàm thường và arrow function</li>
+                            <li>Thao tác DOM: <code>document.getElementById()</code>, v.v.</li>
+                        </ul>
+                    </div>
+
+                    <div id="advanced">
+                        <h3>Nâng Cao (Advanced)</h3>
+                        <ul>
+                            <li>Promise, Callback, Async/Await</li>
+                            <li>Closure, Scope, Hoisting</li>
+                            <li>ES6+: Destructuring, Spread, Template Literals, Optional Chaining</li>
+                            <li>OOP: Class, Constructor, Inheritance</li>
+                            <li>Module: <code>import</code> / <code>export</code></li>
+                            <li><a href="03-arrays-objects\reduce.html" target="_blank" rel="noopener noreferrer">Test
+                                    link CSS</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="examples">
+                        <h3>Ví dụ</h3>
+                        <p>Ví dụ JavaScript: Hiển thị thông báo</p>
+
+                    </div>
+
+                    <div id="references">
+                        <h3>Tài nguyên học tập</h3>
+                        <ul>
+                            <li><a href="https://www.w3schools.com/js/" target="_blank">W3Schools - JavaScript
+                                    Basics</a>
+                            </li>
+                            <li><a href="https://javascript.info/" target="_blank">JavaScript.info</a></li>
+                            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN
+                                    Web Docs</a></li>
+                        </ul>
+                    </div>
+                    <div id="summary">
+                        <h3>Tổng kết</h3>
+                        <p>Với khả năng thích ứng và phát triển không ngừng, JavaScript đã khẳng định vị thế là một
+                            trong những ngôn ngữ lập trình được sử dụng nhiều nhất trên toàn cầu. Nếu bạn đang băn khoăn
+                            không biết học ngôn ngữ gì khi mới tiếp cận với ngành IT, mong muốn trở thành
+                            Backend/Frontend Developer trong tương lai thì Javascript chính là lựa chọn tốt nhất vì
+                            Javascript có thể vừa phát triển được cả backend lẫn frontend.</p>
+                    </div>
+                    <p style="height: 2000px;">(Nội dung dài để test scroll)</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3 sticky-bottom">
+        &copy; 2025 - Thiết kế bởi Bạn
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
