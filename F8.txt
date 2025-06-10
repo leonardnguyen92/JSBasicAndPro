@@ -1258,4 +1258,8 @@ CALLBACK
 		console.log(index, course);
 	});
  - HomeWorks: viết lại các phương thức forEach(), reduce(), find(), filter()
+
+ /**
+ * value types and reference types
+ */
  

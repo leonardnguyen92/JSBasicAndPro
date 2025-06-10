@@ -26,9 +26,12 @@
     <div class="fixed-sidebar">
         <h5>Menu</h5>
         <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="#define">Phương thức <code>reduce()</code> là gì?</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Cú pháp</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Callback trong reduce()</a></li>
+            <li class="nav-item"><a class="nav-link" href="#define">Phương thức <code>reduce()</code> là gì?</a>
+                <ul class="submenu">
+                    <li class="nav-item"><a class="nav-link" href="#">Cú pháp</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Callback trong reduce()</a></li>
+                </ul>
+            </li>
             <li class="nav-item"><a class="nav-link" href="#">Ví dụ</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Tổng kết</a></li>
         </ul>
@@ -105,6 +108,88 @@
                             cho đối số tích luỹ (accumulator) trong mỗi lần lặp.</p>
                         <p>Ở lần lặp cuối cùng, giá trị của <code>accumulator</code> trở thành giá trị kết quả duy nhất.
                         </p>
+                    </div>
+                    <div id="examples">
+                        <div class="syntaxCode"><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="colorBlue">let <span class="colorAqua">tong</span>
+                                <span class="colorWhite">
+                                    <span class="colorGold">=</span> 0;</span><br><br>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;const <span class="colorAqua">mangSo</span> <span
+                                    class="colorWhite"><span class="colorGold">= [</span>5,10,15<span
+                                        class="colorGold">]</span>;</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;const <span class="colorAqua">arrLength</span> <span
+                                    class="colorGold">=</span>
+                                <span class="colorAqua">mangSo<span class="colorWhite">.</span>length</span> <span
+                                    class="colorWhite">;</span><br><br>
+
+                                &nbsp;&nbsp;&nbsp;&nbsp;for <span class="colorWhite">(</span>let <span
+                                    class="colorAqua">i</span> <span class="colorGold">=</span> <span
+                                    class="colorWhite">0;</span> <span class="colorAqua">i</span> <span
+                                    class="colorGold">&lt;</span>
+                                <span class="colorAqua">
+                                    arrLength</span><span class="colorWhite">;</span> <span
+                                    class="colorAqua">i</span><span class="colorGold">++</span><span
+                                    class="colorWhite">) {</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="colorAqua">tong</span>
+                                <span class="colorGold">+=</span> <span class="colorAqua">mangSo</span><span
+                                    class="colorGold">[</span><span class="colorAqua">i</span><span
+                                    class="colorGold">]</span><span class="colorWhite">;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;}<br></span>
+                                &nbsp;&nbsp;&nbsp;&nbsp;console.log<span class="colorGold">(</span><span
+                                    class="colorAqua">tong</span><span class="colorGold">)</span><span
+                                    class="colorWhite">;</span><br> </span><br>
+                        </div>
+                        <p>Chương trình trên hoạt động tốt và <code>tong</code> có kết quả <code>30</code>.</p>
+                        <p>Nhưng cũng có thể làm điều này với phương thức <code>reduce()</code> mà không làm thay đổi
+                            giá trị khởi tạo (Biến mà chúng ta gọi là <code>InitialValue</code> (giá trị khởi tạo) trong
+                            cú pháp).</p>
+                        <div class="syntaxCode"><br>
+                            <span class="commentCode">
+                                // Đây là giá trị khởi tạo của chúng ta<br>
+                                <span class="colorBlue">const <span class="colorAqua">giaTriKhoiTao <span
+                                            class="colorGold">=</span> <span
+                                            class="colorWhite">0;</span></span></span><br>
+                                /* Mảng số */<br>
+                                <span class="colorWhite"><span class="colorBlue">const </span><span
+                                        class="colorAqua">mangSo</span> <span class="colorGold">= [</span>5, 10, 15<span
+                                        class="colorGold">]</span>;</span><br>
+                                <br>
+                                // Tạo hàm tính tổng. Hành động này lát nữa sẽ<br>
+                                // áp dụng lên trên mảng (hàm này sẽ được gọi lại)<br>
+                                <span class="colorGold"><span class="colorBlue">const </span><span
+                                        class="colorAqua">tinhTong</span> = (<span class="colorAqua">boTichLuy<span
+                                            class="colorWhite">,</span> phanTuHienTai</span>) <span class="colorBlue">
+                                        =></span> {</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="colorWhite">console.log("Bộ tích lũy: " +
+                                    boTichLuy);</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="colorWhite">console.log("Phần hiện tại: " +
+                                    phanTuHienTai);</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="colorWhite">console.log("---");</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="colorWhite">return boTichLuy +
+                                    phanTuHienTai;</span><br>
+                                <span class="colorWhite"><span class="colorGold">}</span>;</span><br>
+                                <br>
+                                // Sử dụng reduce()<br>
+                                <span class="colorWhite">const tong = mangSo.reduce(tinhTong, giaTriKhoiTao);</span><br>
+                                <span class="colorWhite">console.log(tong);</span><br>
+                            </span>
+                            <br>
+                        </div>
+                        <p>Kết quả:</p>
+                        <div class="syntaxCode"><br>
+                            Bộ tích lũy: 0<br>
+                            Phần hiện tại: 5<br>
+                            ---<br>
+                            Bộ tích lũy: 5<br>
+                            Phần hiện tại: 10<br>
+                            ---<br>
+                            Bộ tích lũy: 15<br>
+                            Phần hiện tại: 15<br>
+                            ---<br>
+                            30<br><br>
+                        </div><br>
+                        <p>test</p>
                     </div>
                     <div id="testScroll">
                         <p style="height: 2000px;">(Nội dung dài để test scroll)</p>
