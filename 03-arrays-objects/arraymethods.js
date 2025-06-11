@@ -214,8 +214,137 @@ tableHTML += `
 document.getElementById("resultMyReduce").innerHTML = tableHTML;
 
 //Viết hàm myFill() có phương thức hoạt động tương tự như array.fill()
-Array.prototype.myFill = function (callback) {
-    for (let i = 0; i < this.length; i++) {
-        callback(this[i], i, this);
+Array.prototype.myFill = function (value, start, end) {
+    let arrLength = this.length;
+    // Xử lý khi không nhập start và end
+    if (start === undefined) {
+        start = 0;
     }
+    if (end === undefined) {
+        end = arrLength;
+    }
+    // Xử lý khi start là số âm
+    if (start < 0) {
+        start = start + arrLength;
+        // Nếu start vẫn âm thì gán start = 0
+        if (start < 0) {
+            start = 0;
+        }
+    }
+    // Xử lý khi end là số âm
+    if (end < 0) {
+        end = end + arrLength;
+        if (end < 0) {
+            end = 0;
+        }
+    }
+    // Nếu start và end vượt quá độ dài của mảng
+    start = Math.min(start, arrLength);
+    end = Math.min(end, arrLength);
+    // Nếu tất cả đều đúng, tiến hành gán value vào các vị trí trong mảng
+    // bắt đầu từ vị trí start và kết thúc tại vị trí end
+    for (let i = start; i < end; i++) {
+        this[i] = value;
+    }
+    return this;
 }
+
+// Hiển thị kết quả của hàm myFill() lên trang web HTML
+const queryFillArray = `courses.myFill("test",1,4);`
+const resultFill = courses.myFill("test", 1, 4);
+const arrayFillHtml = queryFillArray + "\n" + "Kết quả: \n" + JSON.stringify(resultFill, null, 2);  // format đẹp như console
+document.getElementById("resultMyFill").textContent = arrayFillHtml;
+
+//Viết hàm myEvery() có phương thức hoạt động tương tự như array.every()
+Array.prototype.myEvery = function (callback) {
+    let check = true;
+    for (index in this) {
+        if (this.hasOwnProperty(index)) {
+            if (!callback(this[index], index, this)) {
+                check = false;
+                break;
+            }
+        }
+    }
+    return check;
+}
+
+// Hiển thị kết quả của hàm myEvery() lên trang web HTML
+let checkFinished = courses.myEvery(function (course, index) {
+    return course.isFinish;
+});
+const topicHTML = "Kiểm tra xem tất cả các khoá học đã hoàn thành hay chưa";
+const queryEveryArray = `let checkFinished = courses.myEvery(function (course, index) {
+    return course.isFinish;
+});`;
+let checkFinishedHTML = "";
+if (checkFinished) {
+    checkFinishedHTML = "Đã hoàn thành."
+} else {
+    checkFinishedHTML = "Chưa hoàn thành."
+}
+const resultEvery = "Kết quả: " + checkFinishedHTML;
+const everyHTML = topicHTML + "\n" + queryEveryArray + "\n" + resultEvery;
+document.getElementById("resultMyEvery").textContent = everyHTML;
+
+// Viết hàm myMap() có phương thức hoạt động tương tự array.map()
+Array.prototype.myMap = function (callback) {
+    // Khai báo mảng mới để lưu kết quả
+    let output = [];
+    // Duyệt qua các phần tử của mảng
+    for (let i = 0; i < this.length; i++) {
+        // Đảm bảo bỏ qua các phần tử rỗng
+        if (i in this) {
+            // Đẩy kết quả sau khi xử lý logic vào mảng mới
+            output.push(callback(this[i], i, this));
+        }
+    }
+    // Trả về mảng mới sau khi đã xử lý logic
+    return output;
+};
+
+var courses = [
+    {
+        name: "JavaScript",
+        price: 600,
+        description: "Khoá học JavaScript",
+        isFinish: false
+    },
+    {
+        name: "HTML, CSS",
+        price: 0,
+        description: "Khoá học HTML CSS",
+        isFinish: false
+    },
+    {
+        name: "Ruby",
+        price: 450,
+        description: "Khoá học Ruby",
+        isFinish: true
+    },
+    {
+        name: "Dart",
+        price: 850,
+        description: "Khoá học Dart",
+        isFinish: true
+    },
+    {
+        name: "Java",
+        price: 900,
+        description: "Khoá học Java",
+        isFinish: false
+    }
+];
+// Hiển thị kết quả hàm myMap() lên trang web HTML
+const codeMapJS = `const listCourse = courses.myMap(function (course, index) {
+    let status = course.isFinish ? "Đã hoàn thành" : "Chưa hoàn thành";
+    return \`\${index + 1} - \${course.name} - \${course.price} - \${status}\`;
+});`;
+
+const listCourse = courses.myMap(function (course, index) {
+    let status = course.isFinish ? "Đã hoàn thành" : "Chưa hoàn thành";
+    return `${index + 1} - ${course.name} - ${course.price} - ${status}`;
+});
+
+const listHTML = codeMapJS + "\n" + "Kết quả: \n" + listCourse.join("\n");
+document.getElementById("resultMyMap").textContent = listHTML;
