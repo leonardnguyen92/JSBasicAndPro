@@ -258,7 +258,7 @@ document.getElementById("resultMyFill").textContent = arrayFillHtml;
 //Viết hàm myEvery() có phương thức hoạt động tương tự như array.every()
 Array.prototype.myEvery = function (callback) {
     let check = true;
-    for (index in this) {
+    for (var index in this) {
         if (this.hasOwnProperty(index)) {
             if (!callback(this[index], index, this)) {
                 check = false;
