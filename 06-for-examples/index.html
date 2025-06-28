@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SOME EXAMPLES OF JSON, FETCH IN JAVASCRIPT</title>
+    <!-- BOOSTRAP 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 class="text-center">LIST OF COURSES</h1>
+      </div>
+      <div class="table-div">
+        <table class="table table-bordered table-striped">
+          <thead class="text-center">
+            <tr>
+              <th>STT</th>
+              <th>Course Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="list-courses"></tbody>
+        </table>
+      </div>
+      <div class="table-form">
+        <table style="width: 50%">
+          <tr>
+            <th><label for="name">Name</label></th>
+            <td><input id="name" type="text" name="name" autocomplete="off" /></td>
+          </tr>
+          <tr>
+            <th><label for="description">Description</label></th>
+            <td><input id="description" type="text" name="description" autocomplete="off" /></td>
+          </tr>
+          <tr>
+            <th><label for="price">Price</label></th>
+            <td><input id="price" type="text" name="price" autocomplete="off" /></td>
+          </tr>
+          <tr>
+            <td colspan="2"><button type="button" class="btn btn-success" id="create">Create</button></td>
+          </tr>
+        </table>
+        <div id="form-errors"></div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+    <!-- Bootstrap 5 JS + Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

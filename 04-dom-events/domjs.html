@@ -1,157 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document Object Model</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <p>DOM - Document Object Model - Mô hình các đối tượng tài liệu</p>
-        <p>Có 3 thành phần</p>
-        1. Element: ID, class, tag, CSS selector, HTML collection
-        2. Attribute
-        3. Text
-        HTML DOM and DOM API
-        Document Object
-        document.write("HELLO GUYS!")
-        GET ELEMENT METHODS
-        var headingNode = documnet.getElementById('heading');
-        console.log({
-        element: headingNode
-        });
+      <p>DOM - Document Object Model - Mô hình các đối tượng tài liệu</p>
+      <p>Có 3 thành phần</p>
+      1. Element: ID, class, tag, CSS selector, HTML collection 2. Attribute 3.
+      Text HTML DOM and DOM API Document Object document.write("HELLO GUYS!")
+      GET ELEMENT METHODS var headingNode = documnet.getElementById('heading');
+      console.log({ element: headingNode }); var listItemNodes = var boxNode =
+      document.querySelector('.box-1'); // Công việc 1: Sử dụng tới `boxNode` //
+      Công việc 2: Sử dụng tới các li elements là con của `.box-1`
+      console.log(boxNode.querySelectorAll("li")); Tương đương với
+      console.log(boxNode.getElementsByTagName("li")); // 1. getElementById -
+      Trả về trực tiếp một đối tượng duy nhất // 2. getElementsByClassName // 3.
+      getElementsByTagName // 4. querySelector - Trả về trực tiếp một đối tượng
+      duy nhất // 5. querySelectorAll // 6. HTML collection // 7. document.write
+      ATTRIBUTE NODE AND TEXT NODE var headingElement =
+      document.querySelector('h1'); console.log(headingElement); // setter
+      headingElement.title = "Heading"; headingElement.className = 'heading';
+      headingElement.href = "aLink"; headingElement.setAttribute("class",
+      "heading"); console.log(headomgElement.getAttribute("class")); InnerText
+      And TextContent Property
+      <h1 class="heading">Heading text</h1>
+      1. InnerText let headingElement = document.querySelector('.heading');
+      //Getter console.log(headingElement.innerText); //Setter
+      headingElement.innerText = "New heading"; 2. TextContent
+      console.log(headingElement.textContent);
 
-        var listItemNodes =
+      <h1 class="heading">
+        <span style="display: none">Heading</span>
+        <span>text</span>
+      </h1>
+      console.log(headingElement.innerText); // KQ: text // innerText: chỉ hiển
+      thị những gì được hiển thị trên màn hình trình duyệt khi trang web được
+      chạy // là thuộc tính của element node
+      console.log(headingElement.textContent); // KQ: Tab /n Heading /n text /n
+      tab // textContent: hiển thị tất cả những gì được coi là text node trong
+      html // là thuộc tính tồn tại ở cả element node và text node InnerHTML AND
+      OuterHTML Property
+      <div class="box">
+        <h2 title="H2Heading">Heading H2</h2>
+      </div>
+      let boxElement = document.querySelector(".box"); 1. InnerHTML
+      boxElement.innerHTML = "
+      <h1 title="Heading">New Heading</h1>
+      "; console.log(document..querySelector("h1").innerText); 2. OuterHTML
+      console.log(boxElement.outerHTML); boxElement.outerHTML =
+      "<span>Test</span>"; NODE PROPERTIES DOM CSS
+      Object.assign(boxElement.style, { width: "200px", height: "100px",
+      backgrpundColor: "green", }); console.log(boxElement.style.width);
+      ClassList Property
+      <style>
+        .red {
+          color: red;
+        }
+      </style>
+      <div class="box box-2">
+        <h1>CLASS LIST</h1>
+      </div>
 
-        var boxNode = document.querySelector('.box-1');
-        // Công việc 1: Sử dụng tới `boxNode`
-        // Công việc 2: Sử dụng tới các li elements là con của `.box-1`
-        console.log(boxNode.querySelectorAll("li"));
-        Tương đương với
-        console.log(boxNode.getElementsByTagName("li"));
+      console.log(boxElement.classList); boxElement.classList.add("red"); Thêm
+      nhiều thuọc tính: boxElement.classList.add("red","blue","green"); 1. add
+      2. contains Kiểm tra xem có tồn tại thuộc tính không:
+      console.log(boxElement.classList.contains("red")); // true: thuộc tính
+      class .red có tồn tại // false: không tồn tại 3. remove // Xoá thuộc tính
+      class .red sau 3s setTimeout(() => { boxElement.classList.remove("red");
+      }, 3000); 4. toggle Phương thức toggle dùng để thêm class được chỉ định
+      vào element nếu class đó chưa xuất hiện và xóa bỏ class đó nếu đã xuất
+      hiện. setInterval(() => { boxElement.classList.toggle("red"); }, 1000);
+      DOM EVENTS 1. Attribute events Khi click vào DOM thì sẽ show random number
+      ở console trên broswer
+      <h1 onclick="console.log(Math.random())">DOM events</h1>
+      <h1 onclick="console.log(this).innerText">DOM events</h1>
+      // DOM events 2. Assign event using the element node
+      <h1><span>DOM 1</span></h1>
+      <h1><span>DOM 2</span></h1>
+      <h1><span>DOM 3</span></h1>
+      let h1Element = document.querySelectorAll("h1"); for (var i = 0; i <
+      h1Element.length; i++) {<br />
+      h1Element[i].onclick=function(e) {<br />
+      console/log(e.target);<br />
+      }<br />};<br />
 
-        // 1. getElementById
-        - Trả về trực tiếp một đối tượng duy nhất
-        // 2. getElementsByClassName
-        // 3. getElementsByTagName
-        // 4. querySelector
-        - Trả về trực tiếp một đối tượng duy nhất
-        // 5. querySelectorAll
-        // 6. HTML collection
-        // 7. document.write
+      1. Input / select<br />
+      var inoutElement = document.querySelector("input[type="text"]");<br />
+      inputElement.onchange = function(e) { console.log(e.target.value); }<br />
+      var inputElement = document.querySelector("input[type="checkbox"]");<br />
+      inputElement.onchange = function(e) { console.log(e.target.checked); }<br />
+      var inputElement = document.querySelector("select"); inputElement.onchange
+      = function (e) { console.log(e.target.value); }<br />
+      2. Key up / down
+      <span>
+        document.onkeydown = function (e) {<br />
+        switch (e.which) {<br />
+        case 27:<br />
+        console.log("EXIT");<br />
+        break; } }
+      </span>
 
-        ATTRIBUTE NODE AND TEXT NODE
-        var headingElement = document.querySelector('h1');
+      3. PreventDefault And StopPropagation <br />
+      var aElements = document.links;<br />
+      for(let i = 0; i < aLements.length; ++i) {<br />
+      aElements[i].onclick = function(e) {<br />
+      if (!e.target.href.startWith("https://f8.edu.vn")) {<br />
+      e.preventDefault();<br />
+      } } }<br />
 
-        console.log(headingElement);
-
-        // setter
-        headingElement.title = "Heading";
-        headingElement.className = 'heading';
-        headingElement.href = "aLink";
-
-        headingElement.setAttribute("class", "heading");
-
-        console.log(headomgElement.getAttribute("class"));
-
-        InnerText And TextContent Property
-        <h1 class="heading">Heading text</h1>
-        1. InnerText
-        let headingElement = document.querySelector('.heading');
-        //Getter
-        console.log(headingElement.innerText);
-        //Setter
-        headingElement.innerText = "New heading";
-        2. TextContent
-        console.log(headingElement.textContent);
-
-        <h1 class="heading">
-
-            <span style="display: none;">Heading</span>
-            <span>text</span>
-
-        </h1>
-        console.log(headingElement.innerText); // KQ: text
-        // innerText: chỉ hiển thị những gì được hiển thị trên màn hình trình duyệt khi trang web được chạy
-        // là thuộc tính của element node
-        console.log(headingElement.textContent); // KQ: Tab /n Heading /n text /n tab
-        // textContent: hiển thị tất cả những gì được coi là text node trong html
-        // là thuộc tính tồn tại ở cả element node và text node
-
-        InnerHTML AND OuterHTML Property
-        <div class="box">
-            <h2 title="H2Heading">Heading H2</h2>
-        </div>
-        let boxElement = document.querySelector(".box");
-
-        1. InnerHTML
-        boxElement.innerHTML = "<h1 title="Heading">New Heading</h1>";
-        console.log(document..querySelector("h1").innerText);
-
-        2. OuterHTML
-        console.log(boxElement.outerHTML);
-        boxElement.outerHTML = "<span>Test</span>";
-
-        NODE PROPERTIES
-        DOM CSS
-        Object.assign(boxElement.style, {
-        width: "200px",
-        height: "100px",
-        backgrpundColor: "green",
-        });
-
-        console.log(boxElement.style.width);
-
-        ClassList Property
-        <style>
-            .red {
-                color: red;
-            }
-        </style>
-        <div class="box box-2">
-            <h1>CLASS LIST</h1>
-        </div>
-
-        console.log(boxElement.classList);
-        boxElement.classList.add("red");
-        Thêm nhiều thuọc tính:
-        boxElement.classList.add("red","blue","green");
-
-        1. add
-        2. contains
-        Kiểm tra xem có tồn tại thuộc tính không:
-        console.log(boxElement.classList.contains("red"));
-        // true: thuộc tính class .red có tồn tại
-        // false: không tồn tại
-
-        3. remove
-        // Xoá thuộc tính class .red sau 3s
-        setTimeout(() => {
-        boxElement.classList.remove("red");
-        }, 3000);
-        4. toggle
-        Phương thức toggle dùng để thêm class được chỉ định vào element nếu class đó chưa xuất hiện và xóa bỏ class đó
-        nếu đã xuất hiện.
-        setInterval(() => {
-        boxElement.classList.toggle("red");
-        }, 1000);
-
-        DOM EVENTS
-        1. Attribute events
-        Khi click vào DOM thì sẽ show random number ở console trên broswer
-        <h1 onclick="console.log(Math.random())">DOM events</h1>
-        <h1 onclick="console.log(this).innerText">DOM events</h1> // DOM events
-
-        2. Assign event using the element node
-        <h1><span>DOM 1</span></h1>
-        <h1><span>DOM 2</span></h1>
-        <h1><span>DOM 3</span></h1>
-        let h1Element = document.querySelectorAll("h1");
-        for (var i = 0; i < h1Element.length; i++) { h1Element[i].onclick=function(e) { console/log(e.target); } }
-            </div>
-            <script src="domandevents.js"></script>
-</body>
-
+      4. Event Listener<br />
+    </div>
+    <script src="domandevents.js"></script>
+  </body>
 </html>

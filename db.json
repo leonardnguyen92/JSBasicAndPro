@@ -1,0 +1,66 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "Khoá 1",
+      "description": "Khoá số 1",
+      "price": 10000
+    },
+    {
+      "id": 2,
+      "name": "Khoá 2",
+      "description": "Khoá số 2",
+      "price": 20000
+    },
+    {
+      "name": "Khoá 4",
+      "description": "Khoá học test",
+      "price": 10000000,
+      "id": 7
+    },
+    {
+      "name": "Khoá 5 Test Errors Số 5",
+      "description": "Test Errors",
+      "price": 20000000,
+      "id": 8
+    },
+    {
+      "name": "Khoá học test tên khoá học",
+      "description": "Đây là khoá học để test",
+      "price": 0,
+      "id": 9
+    },
+    {
+      "name": "Khoá học test success alert",
+      "description": "Đây là mô tả khoá học",
+      "price": 100000,
+      "id": 11
+    }
+  ],
+  "errors": [
+    {
+      "error_id": "e001",
+      "error_name": "Hãy nhập tên khóa học!"
+    },
+    {
+      "error_id": "e002",
+      "error_name": "Tên khóa học phải có độ dài từ 20 đến 255 ký tự."
+    },
+    {
+      "error_id": "e003",
+      "error_name": "Hãy nhập mô tả khóa học!"
+    },
+    {
+      "error_id": "e004",
+      "error_name": "Hãy nhập giá tiền!"
+    },
+    {
+      "error_id": "e005",
+      "error_name": "Giá tiền phải là một số!"
+    },
+    {
+      "error_id": "e006",
+      "error_name": "Giá tiền phải lớn hơn 0!"
+    }
+  ]
+}

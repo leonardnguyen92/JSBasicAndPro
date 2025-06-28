@@ -1,0 +1,383 @@
+JSON - JAVASCRIPT OBJECT NOTATION
+- Là một định dạng dữ liệu (chuỗi)
+- Thể hiện dạng kiểu dữ liệu: 
+ + Number
+ + String
+ + Boolean
+ + Null
+ + Array
+ + Object
+ Stringify: Từ Javascript types -> JSON
+ Parse: Từ JSON -> Javascript types
+- Khai báo:
+//Mảng
+let json = '["Javascript","PHP"]';
+// Object
+let json = '{"name": "Nguyễn Hoàn", "age":18}';
+console.log(JSON.parse(json));
+
+let a = "1";
+console.log(JSON.parse(a));
+
+console.log(JSON.stringify([
+    "Javascript","PHP"
+]));
+
+PROMISE (SYNC, ASYNC)
+- Sync (đồng bộ)
+- Async (bất đồng bộ)
+- Promise (Pain)
+ + Callback hell
+ + Pyramid of doom
+ Là một khái niệm sinh ra để xử lý những thao tác bất đồng bộ, trước 
+ khi có promise thì dùng callback - nhưng sẽ sinh ra callback hell
+ Promise có 3 trạng thái:
+  1. Pending
+  2. Fulfilled
+  3. Rejected
+    // 2 bước tạo promise
+    // 1. new Promise
+    // 2. Executor
+    let promise = new Promise(
+        // Executor
+        function(resolve, reject) {
+            // Logic
+            // Success: call resolve()
+            // failure: call reject()
+
+            //fake call api
+            resolve([
+                "id": 1,
+                "name": "Fake"
+            ])
+        }
+    );
+
+    promise sẽ thường trả ra 3 phương thước
+    .then(function(course) {
+        // Thực thi khi promise thực hiện resolve() thành công
+        console.log(course);
+    });
+    .catch(function() {
+        // Thực thi khi promise thực hiện reject() thành công
+        console.log("Failure!");
+    });
+    .finally(function() {
+        // Thực thi khi chạy thành công 1 trong 2 function 
+        // resolve() or reject() thành công.
+        console.log("Done!");
+    });
+
+PROMISE (CHAIN)
+Ví dụ về callback hell và cách giải quyết bằng Promise
+Cập nhật tháng 7 năm 2022
+
+Đây là ví dụ về callback hell trong truyền thuyết, và cách sử dụng 
+Promise để giải quyết nó.
+
+Các bạn có thể thấy khi tạo ra 1 đoạn code callback hell sẽ dẫn đến 
+khó đọc code, thay vì viết như thế, chúng ta có thể áp dụng tính 
+chất chuỗi (chain) của Promise để tạo ra 1 đoạn code dễ nhìn hơn 
+mà vẫn đảm bảo đúng logic.
+
+function hell(value, cb) {
+    cb(value);
+}
+
+// Không sử dụng Promise dẫn đến tạo ra callback hell 
+hell(1, function (valueFromA) {
+    hell(valueFromA + 1, function (valueFromB) {
+        hell(valueFromB + 1, function (valueFromC) {
+            hell(valueFromC + 1, function (valueFromD) {
+                console.log(valueFromD + 1);
+            });
+        });
+    });
+});
+
+// Sử dụng Promise sẽ tạo ra đoạn code dễ đọc hơn và vẫn đảm bảo đúng logic
+function notHell(value) {
+    return new Promise(function (resolve) {
+        resolve(value);
+    });
+}
+
+notHell(1)
+    .then(function (value) {
+        return value + 1;
+    })
+    .then(function (value) {
+        return value + 1;
+    })
+    .then(function (value) {
+        return value + 1;
+    })
+    .then(function (value) {
+        console.log(value + 1);
+    });
+
+PROMISE METHODS (RESOLVE< REJECT, ALL)
+1. Promise.resolve
+ - Khi muốn 1 logic luôn trả về resolve()
+    let promise = Promise.resolve("success!");
+2. Promise.reject
+ - Khi muốn 1 logic luôn trả về reject()
+    let promise = Promise.reject("error!!!");
+3. Promise.all
+    let promise1 = new Promise(function(){
+        setTimeout(function(){
+            resolve([1]);
+        }, 2000);
+    });
+    let promise2 = new Promise(function(){
+        setTimeout( function(){
+            resolve([2,3]);
+        }, 5000);
+    });
+    // Khi 2 promise không cần phụ thuộc vào kết quả của nhau, nhưng 
+    // Nếu ta chạy tuần tự thì sẽ mất 7s mới hiển thị kết quả cuối 
+    // Vì vậy, sử dụng promise.all để chạy đồng thời các promise không
+    // Phụ thuộc kết quả của nhau.
+    Promise.all([promise1, promise2])
+        .then(function(result) {
+            console.log(result);
+        })
+
+4. Ví dụ
+    let users = [
+        {
+            id: 1,
+            name: "Leonard Nguyen",
+        },
+        {
+            id: 2,
+            name: "Nguyen Hoan",
+        },
+        {
+            id: 3,
+            name: "Test User",
+        },
+        // ...
+    ];
+
+    let comments = [
+        {
+            id: 1,
+            user_id: 1,
+            content: "Ra video chua anh oi?",
+        },
+        {
+            id: 2,
+            user_id: 2,
+            content: "Vua ra xong em oi"
+        }
+    ];
+
+    // 1. Lấy comments
+    // 2. Từ comments lấy ra user_id
+    // 3. Từ user_id lấy ra user tương ứng
+
+    // Fake API
+    function getComments() {
+        return new Promise(function(resolve) {
+            setTimeout(function() {
+                resolve(comments);
+            }, 1000);
+        });
+    }
+
+    function getUsersByIds(userIds) {
+        return new Promise(function(resolve) {
+            let result = users.filter(function(user) {
+                return userIds.includes(user.id);
+            });
+            setTimeout(function() {
+                resolve(result); 
+            }, 1000);
+        }, 1000);
+    }
+
+    getComments()
+        .then(function(comments){
+            let userIds = comments.map(function(comment) {
+                return comment.user_id;
+            });
+
+            return getUsersByIds(userIds)
+                .then(function(users) {
+                    return {
+                        users: users,
+                        comments: comments,
+                    };
+                });
+            
+        })
+        .then (function(data) {
+           // Create index.html
+           // Get data, hien thi tren index.html
+           // Todo
+           let commentBlock = document.getElementById("comment-block");
+
+           let html = "";
+           data.comments.forEach(function(comment) {
+            let user = data.users.find(function(user) {
+                return user.id === comment.user_id;
+            });
+            html += `<li>${user.name}: ${comment.content}</li>`;
+           });
+           commentBlock.innerHTML = html;
+        })
+
+Kien thuc can nam vung
+1. Array
+2. function, callback
+3. Promise
+4. DOM
+
+FETCH
+Backend -> API -> Fetch -> JSON/XML -> JSON.parse -> Javascript types 
+-> render ra giao diện với HTML 
+
+JSON SERVER
+- create json server folder
+- open terminal in visual studio code
+- npn version
+- npm i json-server 
+- create a db.json file with some data:
+{
+    "courses": [
+        "id": 1,
+        "name": "Kien thuc co ban",
+        "description": "Fake description"
+    ]
+}
+- open package.json, in line "scripts": add "start": "json-server --watch db.json"
+- in terminal: npm start
+
+POSTMAN - REST API
+- CRUD
+ + Cretate: Tạo mới -> POST
+ + Read: Lấy dữ liệu -> GET
+ + Update: Chỉnh sửa -> PUT / PATCH
+ + Delete: Xoá -> DELETE
+- POSTMAN: download and install app on Windows
+
+EXAMPLE CREATE, UPDATE AND DELETE WITH FETCH AND REST API
+index.html
+<body>
+    <div>
+        <h2>Danh sach khoa hoc</h2>
+
+        <ul id="list-courses"></ul>
+    </div>
+    <div>
+        <div>
+            <label>Name</label>
+            <input type="text" name="name">
+        </div>
+        <div>
+            <label>Description</label>
+            <input type="text" name="descriptiom">
+        </div>
+        <div>
+            <button id="create">Create</button>
+        </div>
+    </div>
+</body>
+
+app.js
+let listCoursesBlock = documnet.querySelector("#list-courses");
+
+let courseApi = "https://localhost:3001/courses";
+
+function start() {
+    getCourses(renderCourses);
+
+    handleCreateForm();
+}
+
+start();
+
+// Functions
+function getCourses(callback) {
+    fetch(courseApi)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(callback)
+}
+
+function createCourse(data, callback) {
+    let options = {
+        method: "POST",
+         headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        // Automatically converted to "username=example&password=password"
+        body: JSON.stringify(data)
+    };
+    fetch(courseApi, options)
+        .then(function(response) {
+            response.json()
+        })
+        .then(callback);
+}
+
+function renderCourses(courses) {
+    let htmls = courses.map(function(course) {
+        return `
+            <li class="course-item-${course.id}">
+                <h4>${course.name}</h4>
+                <p>${course.description}</p>
+                <button onclick="handleDeleteCoure(${course.id})">Delete</button>
+            </li>
+        `;
+    });
+    listCoursesBlock.innerHTML = htmls.join("");
+}
+
+function handleCreateForm() {
+    let createBtn = document.querySelector("#create");
+    createBtn.onclick = function () {
+        let name = document.querySelector("input[name="name"]").value;
+        let description = document.querySelector("input[name="description"]").value;
+
+        let formData = {
+            name: name,
+            description: description
+        };
+
+        createCourse(formData. function(){
+            getCourses(renderCourses);
+        });
+    }
+}
+
+function handleDeleteCoure(id) {
+    let options = {
+        method: "POST",
+         headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        // Automatically converted to "username=example&password=password"
+        body: JSON.stringify(data)
+    };
+    fetch(courseApi + "/" + id, options)
+        .then(function(response) {
+            response.json();
+        })
+        .then(function(){
+            let courseItem = document.querySelector(".course-item-${course.id}");
+            if (courseItem) {
+                courseItem.remove();
+            }
+        });
+}
+
+// BTVN: Viết lại toàn bộ các phương thức thành một chương trình hoàn 
+// chỉnh, bổ sung và hoàn thành phương thức handleUpdateCourse(), 
+// ở trên giao diện trang web, dưới mỗi thông tin khoá học sẽ có một 
+// Update button. Khi click vào button Update, thông tin khoá học sẽ
+// được hiển thị ở ô input (name, description), và button create sẽ 
+// được đổi thành button Save. Khi click Save, dữ liệu trên trang 
+// web sẽ được hiển thị và cập nhật lại.
