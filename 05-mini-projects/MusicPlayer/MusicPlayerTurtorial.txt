@@ -1,0 +1,1201 @@
+Làm một app nghe nhạc giống Zing MP3 bằng JavaScript thuần (Vanilla JS) – tức là không dùng framework như React, thì hoàn toàn có thể làm được, miễn là bạn giới hạn một số tính năng phức tạp để giữ cho dự án đơn giản và phù hợp với công sức.
+
+✅ NÊN LÀM: Các chức năng cốt lõi có thể làm với JavaScript thuần
+Tính năng	Mô tả	Có thể làm bằng JS thuần?
+🎵 Danh sách bài hát	Dữ liệu là một mảng JS chứa các bài hát (MP3, ảnh bìa, tên, nghệ sĩ...)	✅ 100%
+▶️ Trình phát nhạc	Sử dụng thẻ <audio> + JS để Play/Pause/Next/Prev	✅ 100%
+🔁 Lặp lại / 🔀 Random	Xử lý logic trong JavaScript để bật/tắt	✅
+🎚️ Thanh tiến trình	Hiển thị thời gian phát nhạc và cho phép tua	✅
+🖼️ Ảnh bìa & tên bài hát	Hiển thị ảnh đại diện, tiêu đề, nghệ sĩ	✅
+📱 Giao diện responsive	Dùng CSS thuần hoặc thêm một chút Flexbox/Grid	✅
+🚫 NÊN LOẠI BỎ: Các chức năng cần backend hoặc phức tạp hơn
+Tính năng	Vì sao nên bỏ	Nếu muốn làm thì sao?
+🔐 Đăng nhập/Đăng ký	Cần backend và database	Không nên làm khi chỉ dùng JS thuần
+☁️ Lưu trữ playlist người dùng	Cần backend để lưu thông tin	Có thể lưu tạm bằng localStorage nếu rất cần
+📤 Upload nhạc	Cần server xử lý file	Loại bỏ
+🔎 Tìm kiếm nâng cao	Khó tối ưu khi dữ liệu lớn	Nếu ít bài hát thì lọc JS
+💬 Bình luận, gợi ý AI	Quá phức tạp, không cần thiết	Bỏ hoàn toàn
+🧠 Gợi ý cấu trúc dữ liệu đơn giản:
+const songs = [
+  {
+    name: "Nevada",
+    singer: "Vicetone",
+    path: "./music/nevada.mp3",
+    image: "./img/nevada.jpg"
+  },
+  {
+    name: "Spectre",
+    singer: "Alan Walker",
+    path: "./music/spectre.mp3",
+    image: "./img/spectre.jpg"
+  },
+  // ...
+];
+🖼️ Gợi ý bố cục giao diện đơn giản:
+<div id="player">
+  <img id="song-thumb" src="" />
+  <h2 id="song-name"></h2>
+  <p id="singer-name"></p>
+
+  <audio id="audio" src=""></audio>
+
+  <input type="range" id="progress" value="0" step="1" />
+  
+  <div class="controls">
+    <button id="prev">⏮</button>
+    <button id="play">▶️</button>
+    <button id="next">⏭</button>
+    <button id="repeat">🔁</button>
+    <button id="random">🔀</button>
+  </div>
+</div>
+🔁 Cơ chế phát nhạc cơ bản:
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("play");
+
+playBtn.onclick = function () {
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+};
+✅ Tổng kết: Phiên bản Zing MP3 thu nhỏ bằng JS thuần
+✔️ Bạn NÊN làm:
+Danh sách bài hát cố định (file .mp3 có sẵn)
+
+Giao diện phát nhạc, ảnh, thông tin
+
+Play / Pause / Next / Prev / Random / Repeat
+
+Thanh tua bài hát
+
+Lưu trạng thái trong localStorage nếu muốn
+
+❌ Bạn NÊN BỎ:
+Đăng nhập, tài khoản
+
+Upload nhạc
+
+Playlist cá nhân có backend
+
+Bình luận, chia sẻ
+
+Gợi ý AI, thuật toán
+
+💡 Gợi ý mở rộng nâng cao (nếu bạn đã làm ổn):
+
+Thêm hiệu ứng CD quay khi phát nhạc
+
+Thêm lời bài hát
+
+Dark mode
+
+Tự động chuyển bài sau khi kết thúc
+
+Lưu bài hát yêu thích bằng localStorage
+
+👉 Nếu bạn muốn, mình có thể:
+
+Gửi template giao diện cơ bản
+
+Gửi code mẫu hoàn chỉnh
+
+Hướng dẫn theo từng bước nhỏ
+
+Bạn muốn bắt đầu từ phần nào? Hay cần mình tạo demo player mẫu?
+
+Bạn đã nói:
+Hướng dẫn theo từng bước nhỏ, chỉ viết khung (ví dụ như các phương thức, tên phương thức, mô tả chức năng và comment chi tiết ở trong phương thức, không có code) và thư mục sắp xếp
+ChatGPT đã nói:
+Tuyệt vời! Dưới đây là hướng dẫn chi tiết theo từng bước nhỏ để bạn xây dựng ứng dụng nghe nhạc giống Zing MP3 mini bằng JavaScript thuần, theo cách học từng bước, có tổ chức, nhưng chưa viết code, chỉ có tên hàm, mô tả chức năng và comment giải thích rõ ràng bên trong.
+
+📁 Cấu trúc thư mục đề xuất
+zing-mp3-clone/
+├── index.html
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── app.js
+│   ├── music/
+│   │   └── *.mp3
+│   └── img/
+│       └── *.jpg / *.png
+📘 index.html – Cấu trúc giao diện
+Chứa:
+
+Khung HTML cơ bản
+
+Phần giao diện: danh sách bài hát, player, thông tin
+
+Link đến style.css và app.js
+
+🎨 style.css – Giao diện
+Tùy chỉnh CSS theo ý thích, nhưng tối thiểu cần:
+
+Giao diện player
+
+Danh sách bài hát
+
+Responsive mobile
+
+🧠 app.js – Logic chính (chỉ viết khung hàm, chưa viết code cụ thể)
+Dưới đây là khung tổ chức code được chú thích đầy đủ để bạn viết dần.
+
+// ==========================
+// Khai báo biến toàn cục
+// ==========================
+
+// Chứa danh sách bài hát
+const songs = [
+  // Mỗi bài hát gồm: name, singer, path, image
+];
+
+// Chỉ số bài hát hiện tại
+let currentIndex = 0;
+
+// Trạng thái player
+let isPlaying = false;
+let isRandom = false;
+let isRepeat = false;
+
+// ==========================
+// Hàm khởi động ứng dụng
+// ==========================
+function start() {
+  // 1. Định nghĩa các thuộc tính cần thiết
+  // 2. Render danh sách bài hát
+  // 3. Lắng nghe sự kiện người dùng (event handlers)
+}
+📚 1. Các phương thức khởi tạo và render
+// Tạo danh sách HTML từ mảng songs
+function renderPlaylist() {
+  // Duyệt từng phần tử trong mảng songs
+  // Tạo chuỗi HTML và hiển thị vào container
+}
+// Tải thông tin bài hát hiện tại lên UI
+function loadCurrentSong() {
+  // Lấy bài hát từ songs[currentIndex]
+  // Cập nhật ảnh bìa, tiêu đề, ca sĩ, source nhạc...
+}
+🎧 2. Các phương thức điều khiển player
+// Phát nhạc
+function playSong() {
+  // Gọi .play() trên audio element
+  // Cập nhật UI (ví dụ đổi icon từ play → pause)
+}
+// Tạm dừng nhạc
+function pauseSong() {
+  // Gọi .pause() trên audio element
+  // Cập nhật UI ngược lại với play
+}
+// Phát bài hát tiếp theo
+function nextSong() {
+  // Tăng currentIndex, hoặc random nếu đang bật random
+  // Gọi loadCurrentSong() để cập nhật bài mới
+  // Gọi playSong() để tự phát
+}
+// Phát bài hát trước đó
+function prevSong() {
+  // Giảm currentIndex, hoặc random nếu đang bật random
+  // Gọi loadCurrentSong() để cập nhật bài mới
+  // Gọi playSong() để tự phát
+}
+// Phát bài ngẫu nhiên
+function playRandomSong() {
+  // Chọn ngẫu nhiên một index khác currentIndex
+  // Cập nhật currentIndex và gọi loadCurrentSong()
+}
+🔁 3. Xử lý trạng thái và sự kiện
+// Xử lý khi nhạc kết thúc
+function handleEnded() {
+  // Nếu repeat: phát lại cùng bài
+  // Nếu random: gọi playRandomSong()
+  // Nếu bình thường: gọi nextSong()
+}
+// Xử lý thanh tiến trình
+function handleProgress() {
+  // Khi nhạc đang chạy: cập nhật thanh tiến trình
+  // Khi người dùng kéo tua: cập nhật currentTime
+}
+// Bật/tắt phát ngẫu nhiên
+function toggleRandom() {
+  // Đảo giá trị isRandom và cập nhật UI
+}
+// Bật/tắt phát lại
+function toggleRepeat() {
+  // Đảo giá trị isRepeat và cập nhật UI
+}
+// Chọn bài hát trong danh sách
+function handlePlaylistClick(index) {
+  // Gán currentIndex = index
+  // Gọi loadCurrentSong() và playSong()
+}
+🧩 4. Lưu trạng thái bằng localStorage (tùy chọn)
+// Lưu trạng thái (isRandom, isRepeat...) vào localStorage
+function saveConfig() {
+  // Dùng localStorage.setItem()
+}
+// Tải trạng thái đã lưu
+function loadConfig() {
+  // Dùng localStorage.getItem()
+}
+🧪 Gợi ý bước tiếp theo:
+Bạn có thể bắt đầu viết từng hàm theo hướng dẫn trên, từ:
+
+renderPlaylist() và loadCurrentSong()
+
+Xử lý nút Play/Pause
+
+Next/Prev
+
+Tiến độ
+
+Random/Repeat
+
+Cuối cùng thêm hiệu ứng UI đẹp
+
+👉 Nếu bạn muốn, mình có thể tiếp tục giúp bạn từng bước viết code cụ thể cho từng hàm, hoặc tạo sẵn bản starter template để bạn làm theo.
+
+Bạn muốn bắt đầu từ phần nào? renderPlaylist() trước nhé?
+
+Bạn đã nói:
+ok
+ChatGPT đã nói:
+Tuyệt! Vậy mình sẽ hướng dẫn bạn viết phần renderPlaylist() trước – đây là bước quan trọng để hiển thị danh sách bài hát lên giao diện. Chúng ta sẽ viết nó theo đúng khung hướng dẫn trước đó, từng bước một.
+
+🎯 Mục tiêu của renderPlaylist()
+Duyệt qua mảng songs
+
+Tạo ra chuỗi HTML tương ứng cho từng bài hát
+
+Gắn vào một thẻ container (ví dụ: <div class="playlist">)
+
+📄 Giả sử bạn đã có HTML như sau:
+<div class="playlist" id="playlist"></div>
+📦 File app.js – Viết hàm renderPlaylist()
+function renderPlaylist() {
+  // B1: Lấy phần tử DOM chứa danh sách playlist (ví dụ: div#playlist)
+  const playlistElement = document.getElementById("playlist");
+
+  // B2: Tạo một mảng HTML từ danh sách bài hát
+  const htmls = songs.map((song, index) => {
+    return `
+      <div class="song" data-index="${index}">
+        <div class="thumb" style="background-image: url('${song.image}')"></div>
+        <div class="body">
+          <h3 class="title">${song.name}</h3>
+          <p class="author">${song.singer}</p>
+        </div>
+      </div>
+    `;
+  });
+
+  // B3: Gán chuỗi HTML vào phần tử playlist
+  playlistElement.innerHTML = htmls.join('');
+}
+✅ Cách dùng:
+Trong hàm start() hoặc khi load trang, gọi:
+
+start();
+
+function start() {
+  renderPlaylist();
+  // Các bước tiếp theo...
+}
+💡 Gợi ý CSS (tối thiểu):
+.playlist {
+  margin-top: 20px;
+}
+.song {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+.song:hover {
+  background: #eee;
+}
+.thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  background-size: cover;
+  margin-right: 10px;
+}
+.body {
+  flex: 1;
+}
+.title {
+  font-size: 16px;
+  margin: 0;
+}
+.author {
+  font-size: 12px;
+  color: gray;
+}
+🎁 Dữ liệu mẫu bài hát (bạn để ở đầu file app.js):
+const songs = [
+  {
+    name: "Nevada",
+    singer: "Vicetone",
+    path: "./assets/music/nevada.mp3",
+    image: "./assets/img/nevada.jpg"
+  },
+  {
+    name: "Spectre",
+    singer: "Alan Walker",
+    path: "./assets/music/spectre.mp3",
+    image: "./assets/img/spectre.jpg"
+  },
+  {
+    name: "Reality",
+    singer: "Lost Frequencies",
+    path: "./assets/music/reality.mp3",
+    image: "./assets/img/reality.jpg"
+  }
+];
+👉 Sau khi hoàn thành renderPlaylist(), bạn sẽ thấy các bài hát hiện lên như danh sách – giống giao diện Zing MP3 mini.
+
+Bạn muốn mình tiếp tục giúp phần nào tiếp theo? loadCurrentSong() hay playSong()?
+
+Bạn đã nói:
+playSong(), hướng dẫn chi tiết nhưng không code nhé, comment giải thích từng dòng code nhé
+ChatGPT đã nói:
+Tuyệt, chúng ta sẽ tiếp tục với playSong() – một trong những hàm cốt lõi của trình phát nhạc.
+
+🎯 Mục tiêu của playSong()
+Khi người dùng nhấn nút Play, hàm này sẽ:
+
+Gọi phương thức .play() trên phần tử <audio>
+
+Cập nhật trạng thái isPlaying = true
+
+Thay đổi giao diện: nút Play chuyển thành Pause, CD quay, highlight bài đang phát (nếu có)
+
+🧠 Cấu trúc tổng thể của hàm playSong()
+function playSong() {
+  // B1: Gọi audio.play() để phát nhạc
+  // B2: Cập nhật biến isPlaying = true
+  // B3: Cập nhật giao diện:
+  //   - Thay đổi icon play → pause
+  //   - Thêm class “playing” để xoay ảnh CD (nếu có)
+  //   - Làm nổi bật bài hát đang phát
+}
+📘 Giải thích chi tiết từng bước:
+🔹 B1: Phát nhạc bằng audio.play()
+// Gọi phương thức play() của thẻ audio
+// Thẻ audio phải được DOM select trước đó, ví dụ:
+// const audio = document.getElementById("audio");
+🔹 B2: Cập nhật trạng thái player
+// Gán lại biến isPlaying = true
+// Dùng biến này để biết player đang ở trạng thái nào
+// Biến này cũng được dùng trong các hàm xử lý khác (pause, toggle UI)
+🔹 B3: Cập nhật giao diện
+// 1. Thay đổi nút Play thành Pause:
+// - Có thể dùng class (ví dụ thêm class "playing") hoặc đổi icon thủ công
+
+// 2. Nếu có hình CD (thumbnail), thì thêm class "rotating" để xoay ảnh bằng CSS animation
+
+// 3. Highlight bài hát đang phát:
+// - Duyệt qua danh sách .song
+// - Xóa class "active" ở tất cả bài
+// - Thêm class "active" cho bài đang phát (dựa vào currentIndex)
+📎 Lưu ý:
+audio.play() là async, có thể trả về Promise.
+
+Một số trình duyệt chặn autoplay nếu chưa có tương tác người dùng → cần nhấn nút.
+
+Bạn nên xử lý event listener cho nút Play ở bên ngoài (gọi playSong() khi nút được nhấn).
+
+👉 Sau khi có playSong(), bạn có thể làm tiếp hàm pauseSong() để dừng phát và xử lý chuyển đổi giữa Play/Pause.
+
+Bạn muốn hướng dẫn tiếp hàm pauseSong() hay loadCurrentSong()?
+
+1. start()
+js
+Sao chép
+Chỉnh sửa
+// Hàm khởi chạy ứng dụng, được gọi đầu tiên khi app load
+// - Gọi các hàm thiết lập ban đầu: render danh sách bài hát, load bài hát hiện tại
+// - Thiết lập các sự kiện tương tác người dùng (play, pause, next, prev, random, repeat, progress, playlist click...)
+// - Nếu có: load cấu hình đã lưu (random, repeat)
+2. render()
+js
+Sao chép
+Chỉnh sửa
+// Tạo và hiển thị danh sách bài hát (playlist) lên UI
+// Duyệt mảng this.songs và tạo các phần tử DOM dạng HTML với thông tin bài hát (tên, ca sĩ, ảnh bìa)
+// Gán vào phần tử .playlist trong DOM
+3. loadCurrentSong()
+js
+Sao chép
+Chỉnh sửa
+// Cập nhật giao diện để hiển thị bài hát hiện tại theo this.currentIndex
+// - Đổi tiêu đề bài hát trong header <h2>
+// - Cập nhật ảnh bìa CD (.cd-thumb)
+// - Cập nhật đường dẫn bài hát cho thẻ <audio src="">
+// Khi hàm này chạy xong, audio đã sẵn sàng để phát
+4. playSong()
+js
+Sao chép
+Chỉnh sửa
+// Bắt đầu phát nhạc bài hiện tại
+// - Gọi this.audio.play()
+// - Cập nhật trạng thái this.isPlaying = true
+// - Cập nhật UI nút Play/Pause (thêm class "playing")
+// - Kích hoạt hiệu ứng quay đĩa CD (nếu có)
+5. pauseSong()
+js
+Sao chép
+Chỉnh sửa
+// Tạm dừng phát nhạc
+// - Gọi this.audio.pause()
+// - Cập nhật trạng thái this.isPlaying = false
+// - Cập nhật UI nút Play/Pause (bỏ class "playing")
+// - Dừng hiệu ứng quay đĩa CD
+6. nextSong()
+js
+Sao chép
+Chỉnh sửa
+// Chuyển sang bài hát tiếp theo trong danh sách
+// - Tăng this.currentIndex lên 1
+// - Nếu vượt quá số bài, quay lại bài đầu tiên
+// - Nếu chế độ random bật, gọi playRandomSong() thay thế
+// - Gọi loadCurrentSong() và playSong()
+7. prevSong()
+js
+Sao chép
+Chỉnh sửa
+// Chuyển sang bài hát trước đó trong danh sách
+// - Giảm this.currentIndex xuống 1
+// - Nếu nhỏ hơn 0, chuyển về bài cuối cùng
+// - Nếu chế độ random bật, gọi playRandomSong() thay thế
+// - Gọi loadCurrentSong() và playSong()
+8. playRandomSong()
+js
+Sao chép
+Chỉnh sửa
+// Chọn và phát một bài hát ngẫu nhiên khác bài hiện tại
+// - Lấy ngẫu nhiên một chỉ số bài hát khác this.currentIndex
+// - Cập nhật this.currentIndex, gọi loadCurrentSong() và playSong()
+9. toggleRandom()
+js
+Sao chép
+Chỉnh sửa
+// Bật hoặc tắt chế độ phát bài ngẫu nhiên
+// - Đảo giá trị this.isRandom
+// - Cập nhật giao diện nút random (thêm/xóa class active)
+// - Ghi trạng thái vào localStorage (nếu lưu cấu hình)
+10. toggleRepeat()
+js
+Sao chép
+Chỉnh sửa
+// Bật hoặc tắt chế độ lặp lại bài hát
+// - Đảo giá trị this.isRepeat
+// - Cập nhật giao diện nút repeat (thêm/xóa class active)
+// - Ghi trạng thái vào localStorage (nếu lưu cấu hình)
+11. handleProgress()
+js
+Sao chép
+Chỉnh sửa
+// Cập nhật thanh tiến trình nhạc khi bài đang phát
+// - Lắng nghe sự kiện timeupdate của audio
+// - Tính % tiến trình và gán vào input#progress.value
+// - Lắng nghe sự kiện input trên thanh progress để cho phép tua nhạc
+// - Cập nhật thời gian phát audio theo giá trị thanh progress
+12. handleEnded()
+js
+Sao chép
+Chỉnh sửa
+// Xử lý khi bài hát kết thúc (audio.onended)
+// - Nếu isRepeat true, phát lại bài hiện tại
+// - Nếu isRandom true, phát bài ngẫu nhiên
+// - Nếu không, chuyển sang bài tiếp theo
+13. handlePlaylistClick(index)
+js
+Sao chép
+Chỉnh sửa
+// Xử lý khi người dùng click vào bài hát trong danh sách playlist
+// - Cập nhật this.currentIndex = index bài được chọn
+// - Gọi loadCurrentSong() và playSong()
+// - Cập nhật giao diện bài hát active
+14. saveConfig()
+js
+Sao chép
+Chỉnh sửa
+// Lưu trạng thái cấu hình player (isRandom, isRepeat, currentIndex...) vào localStorage
+// Giúp lưu trạng thái khi reload trang
+15. loadConfig()
+js
+Sao chép
+Chỉnh sửa
+// Tải lại cấu hình player từ localStorage khi app khởi động
+// Gán các giá trị cấu hình vào this.isRandom, this.isRepeat...
+16. highlightCurrentSong()
+js
+Sao chép
+Chỉnh sửa
+// Đánh dấu bài hát hiện tại trong playlist bằng class "active"
+// Xóa class active ở các bài khác
+// Giúp người dùng dễ nhìn thấy bài đang phát
+17. defineProperties()
+js
+Sao chép
+Chỉnh sửa
+// Định nghĩa thuộc tính động this.currentSong để truy cập bài hát hiện tại dễ dàng
+// Ví dụ: this.currentSong trả về this.songs[this.currentIndex]
+
+handleEvents()
+
+// Hàm gán tất cả các sự kiện tương tác người dùng cho các nút và phần tử trong app
+handleEvents: function () {
+  // 1. Bắt sự kiện click nút Play/Pause:
+  //    - Nếu đang chơi (this.isPlaying) thì gọi pauseSong()
+  //    - Nếu đang dừng thì gọi playSong()
+
+  // 2. Bắt sự kiện click nút Next:
+  //    - Gọi nextSong()
+
+  // 3. Bắt sự kiện click nút Prev:
+  //    - Gọi prevSong()
+
+  // 4. Bắt sự kiện click nút Random:
+  //    - Gọi toggleRandom()
+
+  // 5. Bắt sự kiện click nút Repeat:
+  //    - Gọi toggleRepeat()
+
+  // 6. Bắt sự kiện timeupdate của thẻ audio:
+  //    - Cập nhật thanh tiến trình thông qua handleProgress()
+
+  // 7. Bắt sự kiện khi người dùng kéo thanh progress (input event):
+  //    - Cập nhật thời gian bài hát theo vị trí thanh progress
+
+  // 8. Bắt sự kiện audio kết thúc bài hát (ended):
+  //    - Gọi handleEnded() để xử lý chuyển bài hoặc lặp lại
+
+  // 9. Bắt sự kiện click vào playlist:
+  //    - Lắng nghe sự kiện click trên .playlist (event delegation)
+  //    - Xác định bài hát được click qua chỉ số index
+  //    - Gọi handlePlaylistClick(index)
+}
+Tóm tắt handleEvents():
+Là nơi bạn kết nối tất cả tương tác của người dùng với các hàm xử lý chức năng.
+
+Các sự kiện quan trọng gồm: play/pause, next, prev, random, repeat, tua nhạc, kết thúc bài hát, chọn bài trong danh sách.
+
+Đảm bảo UI và logic đồng bộ với trạng thái ứng dụng.
+
+//=========================================//
+//  Danh sách các hàm cần viết & chức năng //
+//=========================================//
+
+1. start()
+
+// Hàm khởi chạy ứng dụng, được gọi khi app load
+// - Gọi loadConfig() để tải trạng thái đã lưu (repeat, random, ...)
+// - Định nghĩa thuộc tính currentSong với defineProperties()
+// - Render danh sách bài hát ra UI (render())
+// - Load thông tin bài hát hiện tại lên UI (loadCurrentSong())
+// - Thiết lập các sự kiện tương tác người dùng (handleEvents())
+2. defineProperties()
+
+// Định nghĩa thuộc tính getter this.currentSong
+// Trả về bài hát hiện tại dựa vào this.currentIndex
+// Giúp truy cập this.currentSong thay vì this.songs[this.currentIndex]
+3. render()
+
+// Hiển thị danh sách bài hát lên phần tử .playlist
+// Lặp qua mảng this.songs, tạo HTML cho từng bài (ảnh, tên, ca sĩ)
+// Thêm class "active" cho bài hiện tại để highlight
+4. loadCurrentSong()
+
+// Cập nhật giao diện theo bài hát hiện tại (this.currentSong)
+// - Thay đổi tên bài hát trên header (<h2>)
+// - Thay đổi ảnh bìa CD (.cd-thumb)
+// - Gán đường dẫn bài hát cho thẻ <audio> (audio.src)
+// Sau khi gọi hàm này, audio đã sẵn sàng để phát
+5. playSong()
+
+// Bắt đầu phát bài hát hiện tại
+// - Gọi this.audio.play()
+// - Cập nhật trạng thái this.isPlaying = true
+// - Thêm class "playing" vào nút play để đổi icon
+// - Kích hoạt animation quay đĩa CD (nếu có)
+6. pauseSong()
+
+// Tạm dừng phát bài hát
+// - Gọi this.audio.pause()
+// - Cập nhật trạng thái this.isPlaying = false
+// - Bỏ class "playing" khỏi nút play để đổi icon
+// - Dừng animation quay đĩa CD
+7. nextSong()
+
+// Chuyển sang bài hát kế tiếp trong danh sách
+// - Tăng this.currentIndex lên 1
+// - Nếu vượt quá cuối danh sách thì quay lại đầu
+// - Nếu chế độ random bật thì gọi playRandomSong()
+// - Gọi loadCurrentSong() và playSong()
+8. prevSong()
+
+// Chuyển sang bài hát trước đó trong danh sách
+// - Giảm this.currentIndex xuống 1
+// - Nếu nhỏ hơn 0 thì chuyển về bài cuối cùng
+// - Nếu chế độ random bật thì gọi playRandomSong()
+// - Gọi loadCurrentSong() và playSong()
+9. playRandomSong()
+
+// Chọn ngẫu nhiên một bài hát khác bài hiện tại
+// - Sinh chỉ số ngẫu nhiên, đảm bảo khác this.currentIndex
+// - Cập nhật this.currentIndex, gọi loadCurrentSong() và playSong()
+10. toggleRandom()
+
+// Bật hoặc tắt chế độ phát bài ngẫu nhiên
+// - Đảo giá trị this.isRandom
+// - Cập nhật giao diện nút random (thêm hoặc bỏ class "active")
+// - Lưu cấu hình vào localStorage (nếu có)
+11. toggleRepeat()
+
+// Bật hoặc tắt chế độ lặp lại bài hát
+// - Đảo giá trị this.isRepeat
+// - Cập nhật giao diện nút repeat (thêm hoặc bỏ class "active")
+// - Lưu cấu hình vào localStorage (nếu có)
+12. handleProgress()
+
+// Cập nhật thanh tiến trình khi bài hát đang phát
+// - Bắt sự kiện timeupdate của thẻ audio
+// - Tính phần trăm tiến trình và cập nhật input[type=range]
+// - Xử lý sự kiện người dùng kéo thanh progress để tua bài hát
+13. handleEnded()
+
+// Xử lý khi bài hát kết thúc (audio.onended)
+// - Nếu isRepeat true thì phát lại bài hiện tại
+// - Nếu isRandom true thì phát bài ngẫu nhiên
+// - Nếu không thì chuyển sang bài tiếp theo
+14. handlePlaylistClick(index)
+
+// Xử lý khi người dùng click chọn bài hát trong playlist
+// - Cập nhật this.currentIndex = index được click
+// - Gọi loadCurrentSong() và playSong()
+// - Cập nhật giao diện highlight bài hát đang phát
+15. highlightCurrentSong()
+
+// Cập nhật class "active" cho bài hát đang phát trong playlist
+// - Xóa class "active" ở các bài khác
+// - Thêm class "active" cho bài hiện tại dựa trên this.currentIndex
+16. saveConfig()
+
+// Lưu trạng thái cấu hình player (isRandom, isRepeat...) vào localStorage
+// Giúp duy trì trạng thái khi reload trang
+17. loadConfig()
+
+// Tải trạng thái cấu hình player từ localStorage khi app khởi động
+// Gán giá trị đã lưu vào this.isRandom, this.isRepeat...
+18. handleEvents()
+
+// Gán các sự kiện tương tác người dùng cho UI:
+// - Bấm nút play/pause → gọi playSong()/pauseSong()
+// - Bấm nút next → gọi nextSong()
+// - Bấm nút prev → gọi prevSong()
+// - Bấm nút random → gọi toggleRandom()
+// - Bấm nút repeat → gọi toggleRepeat()
+// - Khi audio thay đổi tiến trình → gọi handleProgress()
+// - Khi user kéo thanh progress → tua bài hát
+// - Khi audio kết thúc → gọi handleEnded()
+// - Click vào playlist → gọi handlePlaylistClick()
+
+Dưới đây là thứ tự viết các hàm và phân tích chi tiết hoạt động của hàm start() trong app nghe nhạc JavaScript thuần (Vanilla JS) dựa trên cấu trúc bạn có:
+
+1. Thứ tự viết các hàm (gợi ý)
+defineProperties()
+→ Để tạo thuộc tính currentSong tiện truy cập bài hát hiện tại.
+
+loadConfig()
+→ Tải cấu hình (repeat, random...) nếu có từ localStorage.
+
+render()
+→ Hiển thị danh sách bài hát lên UI.
+
+loadCurrentSong()
+→ Cập nhật UI với bài hát hiện tại dựa vào currentIndex.
+
+handleEvents()
+→ Gán các sự kiện cho UI (play, pause, next, prev, progress...).
+
+playSong() và pauseSong()
+→ Xử lý phát/tạm dừng bài hát.
+
+nextSong(), prevSong(), playRandomSong()
+→ Điều khiển chuyển bài.
+
+toggleRandom() và toggleRepeat()
+→ Bật/tắt các chế độ phát.
+
+handleProgress()
+→ Cập nhật thanh tiến trình và tua bài.
+
+handleEnded()
+→ Xử lý khi bài hát kết thúc.
+
+handlePlaylistClick(index)
+→ Xử lý click chọn bài trong playlist.
+
+highlightCurrentSong()
+→ Đánh dấu bài đang phát trong danh sách.
+
+saveConfig()
+→ Lưu cấu hình (nếu cần).
+
+2. Hoạt động chi tiết của start()
+
+start: function() {
+    // Bước 1: Tải cấu hình đã lưu (repeat, random, ...)
+    this.loadConfig();
+
+    // Bước 2: Định nghĩa thuộc tính tiện lợi để truy cập bài hát hiện tại
+    this.defineProperties();
+
+    // Bước 3: Render danh sách bài hát ra UI
+    this.render();
+
+    // Bước 4: Load bài hát hiện tại vào UI (tên, ảnh bìa, audio.src)
+    this.loadCurrentSong();
+
+    // Bước 5: Gán các sự kiện cho các nút, thanh progress, playlist...
+    this.handleEvents();
+
+    // Bước 6: (Tuỳ chọn) Highlight bài hát đang phát trong playlist
+    this.highlightCurrentSong();
+
+    // Bước 7: (Tuỳ chọn) Nếu cần, tự động play bài đầu tiên hoặc theo trạng thái isPlaying
+    // Ví dụ: nếu bạn muốn tự động phát khi trang load, có thể gọi this.playSong() ở đây
+}
+Tóm tắt flow
+start() là điểm bắt đầu, thiết lập trạng thái app và UI theo dữ liệu và cấu hình hiện tại.
+
+Tải cấu hình để giữ trạng thái lần trước.
+
+Định nghĩa thuộc tính tiện lợi.
+
+Render playlist để người dùng thấy danh sách bài hát.
+
+Load bài hát hiện tại lên UI để sẵn sàng phát.
+
+Gán tất cả sự kiện tương tác để app hoạt động.
+
+Highlight bài hát đang phát để dễ nhận biết.
+
+Có thể phát nhạc tự động (tuỳ ý).
+
+    loadConfig: function () {
+        // Bước 1: Đọc dữ liệu từ localStorage
+        // - Dùng localStorage.getItem() để lấy chuỗi JSON đã lưu
+        // - Chuỗi này đại diện cho cấu hình app từ lần trước (nếu có)
+        // - Có thể đặt key là 'PLAYER_CONFIG' hoặc tên bạn đặt trước đó
+
+        // Bước 2: Kiểm tra nếu có dữ liệu thì parse JSON ra object
+        // - Dùng JSON.parse() để chuyển từ chuỗi JSON sang object
+        // - Kiểm tra object có tồn tại thì mới cập nhật
+
+        // Bước 3: Cập nhật lại các biến trạng thái từ object đã parse
+        // - Gán this.isRandom = config.isRandom
+        // - Gán this.isRepeat = config.isRepeat
+        // - Có thể cập nhật thêm currentIndex nếu bạn muốn lưu bài đang phát
+
+        // Bước 4: (Tuỳ chọn) Cập nhật giao diện nếu trạng thái ảnh hưởng UI
+        // - Ví dụ: nếu repeat bật sẵn thì thêm class “active” cho nút repeat
+    }
+    
+    defineProperties: function () {
+      // Sử dụng Object.defineProperty để thêm thuộc tính "currentSong" vào this (app)
+      // - Thuộc tính này không lưu giá trị, mà dùng getter để tự động tính toán
+      // - Mỗi lần truy cập this.currentSong, hàm getter sẽ chạy
+
+      Object.defineProperty(this, 'currentSong', {
+        // Định nghĩa hàm getter
+        get: function () {
+          // Trả về bài hát hiện tại trong danh sách
+          // → dựa vào chỉ số this.currentIndex
+          // → chính là this.songs[this.currentIndex]
+        }
+      });
+    }
+
+    loadCurrentSong: function () {
+      // Gán thông tin bài hát vào UI: tên, ca sĩ, ảnh bìa...
+      // Gán đường dẫn file MP3 vào audio.src
+      // B1: Truy cập vào bài hát hiện tại dựa vào chỉ số this.currentIndex
+      // - Dùng this.songs[this.currentIndex] để lấy ra object bài hát hiện tại
+      // - Object này sẽ chứa các thông tin như: name, singer, path, image
+
+      // B2: Cập nhật tiêu đề bài hát trong phần header
+      // - Tìm phần tử DOM là thẻ <h2> hiển thị tên bài hát
+      // - Gán nội dung text (innerText hoặc textContent) = song.name
+ 
+      // B3: Cập nhật ảnh bìa trong khung CD
+      // - Tìm phần tử .cd-thumb
+      // - Đặt thuộc tính backgroundImage (hoặc src nếu dùng <img>) = song.image
+
+      // B4: Cập nhật đường dẫn nhạc trong thẻ <audio>
+      // - Tìm phần tử <audio id="audio">
+      // - Gán thuộc tính src = song.path
+
+      // => Sau khi thực hiện xong hàm này:
+      //    + Giao diện sẽ hiển thị đúng thông tin bài hát hiện tại
+      //    + Khi gọi playSong(), audio đã sẵn sàng để phát bài đó
+    }
+
+    playSong() {
+      // B1: Lấy phần tử audio từ DOM
+      // - Sử dụng document.getElementById hoặc lưu sẵn từ trước
+      // - Đây là thẻ <audio id="audio"> chứa file nhạc sẽ được phát
+
+      // B2: Gọi phương thức play() trên audio
+      // - audio.play() là hàm tích hợp sẵn giúp phát file nhạc
+      // - Có thể trả về Promise → dùng khi cần bắt lỗi (nếu có)
+
+      // B3: Gán this.isPlaying = true
+      // - Cập nhật trạng thái player để sau này dùng ở các hàm khác
+      // - Tránh sai lệch logic khi phân biệt giữa đang phát và tạm dừng
+      
+      // B4: Cập nhật giao diện nút Play/Pause
+      // - Lấy phần tử có class .btn-toggle-play (nút điều khiển)
+      // - Thêm class "playing" vào nút hoặc vào .player (tuỳ bạn xử lý CSS)
+      //   → giúp chuyển đổi giữa icon play và pause
+
+      // B5: Làm đĩa CD quay (nếu có)
+      // - Lấy phần tử .cd-thumb
+      // - Thêm class (ví dụ: "rotating") để kích hoạt animation quay
+      // - Class này cần được định nghĩa trong CSS với @keyframes rotateCD
+
+      // B6: Cập nhật lớp active trong danh sách bài hát (nếu có)
+      // - Duyệt tất cả phần tử .song
+      // - Xoá class "active" khỏi tất cả các bài
+      // - Thêm class "active" cho bài có index === this.currentIndex
+      // - Giúp giao diện hiển thị bài nào đang phát
+
+      // => Kết thúc: bài hát được phát, giao diện đồng bộ, trạng thái đúng
+    },
+    pauseSong: function () {
+      // B1: Gọi phương thức .pause() trên thẻ <audio>
+      // - Dừng phát nhạc
+
+      // B2: Cập nhật trạng thái isPlaying = false
+      // - Dùng để các phần khác của app biết là đang dừng
+
+      // B3: Cập nhật giao diện:
+      // - Gỡ class "playing" khỏi nút .btn-toggle-play
+      //   → Giúp icon đổi về biểu tượng Play
+
+      // - Gỡ class quay đĩa CD (ví dụ: "rotating") khỏi .cd-thumb
+      //   → Đĩa dừng quay
+    },
+    nextSong: function () {
+      // B1: Tăng chỉ số bài hát (currentIndex += 1)
+      // - Nếu đang ở bài cuối cùng (this.songs.length - 1), quay lại bài đầu (index = 0)
+
+      // B2: Gọi this.loadCurrentSong()
+      // - Cập nhật giao diện: tên, ảnh, đường dẫn bài hát
+
+      // B3: Nếu trạng thái hiện tại đang phát (this.isPlaying)
+      // - Gọi this.playSong() để tự động phát bài mới
+
+      // B4: Cập nhật class "active" cho bài hát mới trong danh sách
+      // - Duyệt toàn bộ .song
+      // - Xoá class "active" khỏi tất cả
+      // - Gán "active" cho bài có index = currentIndex
+    },
+    prevSong: function() {
+      // B1: Giảm chỉ số bài hát (currentIndex -= 1)
+      // - Nếu đang ở bài hát đầy tiên (index = 0), tiến đến bài hát cuối cùng (this.songs.length - 1)
+
+      // B2: Gọi this.loadCurrentSong()
+      // - Cập nhật giao diện: tên, ảnh, đường dẫn bài hát
+
+      // B3: Nếu trạng thái hiện tại đang phát (this.isPlaying)
+      // - Gọi this.playSong() để tự động phát bài mới
+
+      // B4: Cập nhật class "active" cho bài hát mới trong danh sách
+      // - Duyệt toàn bộ .song
+      // - Xoá class "active" khỏi tất cả
+      // - Gán "active" cho bài có index = currentIndex
+    },
+    playRandomSong: function () {
+      // Bước 1: Tạo biến để lưu chỉ số bài hát mới
+      // - Tạo một biến newIndex tạm thời. Biến này sẽ chứa chỉ số bài hát được chọn ngẫu nhiên.
+
+      // Bước 2: Lặp để tìm bài hát khác với bài đang phát
+      // - Dùng vòng lặp (while hoặc do...while) để đảm bảo bài mới không trùng với this.currentIndex.
+      // - Trong mỗi vòng lặp:
+      // - Chọn một số ngẫu nhiên từ 0 đến this.songs.length - 1.
+      // - Nếu khác this.currentIndex, thì thoát vòng lặp.
+
+      // Bước 3: Cập nhật chỉ số bài hiện tại
+      // - Sau khi chọn được newIndex, gán this.currentIndex = newIndex.
+
+      // Bước 4: Gọi phương thức loadCurrentSong()
+      // - Mục đích: cập nhật thông tin bài hát (ảnh, tên, đường dẫn file MP3) lên giao diện.
+
+      // Bước 5: Gọi phương thức playSong()
+      // - Nếu người dùng đang ở trạng thái “đang phát”, thì gọi playSong() để phát bài mới.
+    },
+    toggleRandom: function () {
+      // B1: Đảo ngược trạng thái isRandom
+      // - Nếu đang false → chuyển thành true
+      // - Nếu đang true → chuyển thành false
+
+      // B2: Cập nhật giao diện cho nút Random
+      // - Tìm phần tử .btn-random
+      // - Nếu isRandom là true: thêm class 'active'
+      // - Nếu false: xoá class 'active'
+
+      // B3: Lưu lại cấu hình vào localStorage (nếu có hàm saveConfig)
+      // - Gọi this.saveConfig() nếu đã định nghĩa trước
+    },
+    toggleRepeat: function () {
+      // Bước 1: Đảo giá trị isRepeat
+      // - Nếu this.isRepeat hiện là true, thì đặt lại thành false.
+      // - Nếu đang là false, thì đổi thành true.
+      // - Mục đích: mỗi lần bấm nút lặp lại, trạng thái được bật hoặc tắt luân phiên.
+
+      // Bước 2: Cập nhật giao diện cho nút Repeat
+      // - Tìm phần tử nút .btn-repeat.
+      // - Nếu isRepeat === true, thì thêm class "active" để tô sáng nút.
+      // - Nếu isRepeat === false, thì xoá class "active" để tắt tô sáng.
+      // - Điều này giúp người dùng biết khi nào đang bật chế độ lặp lại.
+
+      // Bước 3: Lưu trạng thái vào localStorage
+      // - Gọi hàm this.saveConfig() (nếu đã có).
+
+      // Mục đích: lưu trạng thái isRepeat để khi tải lại trang, app vẫn nhớ người dùng đã bật chế độ lặp lại hay chưa.
+    },
+    handleProgress: function () {
+      // Bước 1: Gán sự kiện ontimeupdate cho audio
+      // - Mỗi khi thời gian phát nhạc thay đổi (tức là nhạc đang chạy), sự kiện ontimeupdate sẽ được gọi.
+      // - Đây là nơi bạn cập nhật thanh tiến trình (input[type="range"]) để phản ánh phần trăm bài hát đã phát.
+
+      // Bước 2: Tính phần trăm tiến độ
+      // - Lấy thời gian hiện tại (audio.currentTime) và tổng thời gian (audio.duration) của bài hát.
+      // - Tính phần trăm: currentTime / duration * 100.
+      // - Mục đích: thể hiện tiến độ bài hát bằng phần trăm để set vào value của input dạng range.
+
+      // Bước 3: Cập nhật giao diện thanh progress
+      // - Gán giá trị vừa tính được vào value của input range (có id là progress).
+      // - Giúp thanh tua nhạc di chuyển đúng theo thời gian đang phát.
+
+      // Bước 4 (tuỳ chọn): Bắt sự kiện tua thủ công
+      // - Khi người dùng kéo thanh tiến trình:
+      // - Gán lại audio.currentTime dựa vào progress.value.
+      // - Tính newCurrentTime = progress.value / 100 * duration.
+      // - Giúp người dùng tua đến một đoạn bất kỳ trong bài nhạc.
+    },
+    handleSeek: function () {
+      // B1: Truy cập phần tử thanh tiến trình
+      // - Dùng document.getElementById hoặc lưu sẵn từ this.progress nếu có
+      // - Đây là thẻ <input type="range" id="progress">
+
+      // B2: Gán sự kiện oninput cho thanh tiến trình
+      // - Mỗi khi người dùng kéo thanh → sự kiện được gọi liên tục
+
+      // B3: Trong hàm xử lý:
+      //    - Lấy giá trị phần trăm (value) của thanh
+      //    - Tính thời gian cần tua tới:
+      //       thờiGianMới = (value / 100) * duration
+      //    - Gán vào this.audio.currentTime để tua tới thời gian đó
+    },
+    handleEnded: function() {
+      // Bước 1: Gán sự kiện onended cho audio
+      // - Gán trong phương thức handleEnded hoặc trong handleEvents.
+      // - onended là sự kiện được kích hoạt khi bài hát phát xong hoàn toàn.
+
+      // Bước 2: Kiểm tra trạng thái lặp lại (isRepeat)
+      // - Nếu this.isRepeat === true:
+      // - Gọi lại playSong() để phát lại chính bài hiện tại.
+      // - Không cần đổi bài.
+
+      // Bước 3: Kiểm tra trạng thái phát ngẫu nhiên (isRandom)
+      // - Nếu this.isRandom === true và isRepeat === false:
+      // - Gọi playRandomSong().
+      // - Hàm này sẽ tự chọn bài mới ngẫu nhiên khác bài hiện tại.
+
+      // Bước 4: Chế độ bình thường
+      // - Nếu không phải repeat và không phải random:
+      // - Gọi nextSong() để chuyển sang bài tiếp theo.
+      // - Trong nextSong(), bạn nhớ gọi lại playSong() để phát bài đó.
+
+      // Bước 5 (tùy chọn): Cập nhật giao diện
+      // - Nếu bạn có cập nhật active trong playlist, thì:
+      // - Hãy chắc rằng hàm playSong() hoặc loadCurrentSong() đã có xử lý cập nhật giao diện playlist rồi.
+      // - Không cần lặp lại trong handleEnded.
+    },
+    handlePlaylistClick: function () {
+      // Bước 1: Lấy phần tử cha .playlist
+      // - Đây là thẻ bao quanh toàn bộ các bài hát.
+      // - Gán sự kiện onclick cho phần tử này – chỉ 1 lần duy nhất.
+
+      // Bước 2: Bên trong hàm xử lý onclick, lấy e.target
+      // - e.target là phần tử cụ thể mà người dùng đã click (có thể là .title, .author, .thumb, v.v.).
+      // - Dùng closest(".song") để tìm phần tử .song gần nhất từ e.target.
+
+      // Bước 3: Kiểm tra điều kiện hợp lệ
+      // - Đảm bảo songElement tìm được khác null.
+      // - Đảm bảo người dùng không click vào nút .option (nếu có).
+      // - Đảm bảo bài hát được click không phải bài đang phát (tránh load lại).
+
+      // Bước 4: Tìm index của bài hát được click
+      // - Lấy danh sách tất cả .song trong .playlist.
+      // - Chuyển NodeList này thành Array.
+      // - Dùng indexOf() để lấy được vị trí của .song được click.
+
+      // Bước 5: Cập nhật currentIndex và xử lý
+      // - Gán this.currentIndex = index vừa tìm được.
+      // - Gọi this.loadCurrentSong() để cập nhật giao diện và file nhạc.
+      // - Nếu this.isPlaying === true, gọi this.playSong() để phát nhạc.
+      // - Ngược lại, chỉ gọi this.updateActiveSong() để đổi giao diện.
+    },
+    saveConfig: function () {
+      // Bước 1: Tạo object mới chứa trạng thái cấu hình hiện tại
+      // - Bao gồm các thuộc tính như isRandom, isRepeat
+      // - Sau này có thể mở rộng thêm volume, currentIndex...
+
+      // Bước 2: Dùng JSON.stringify() để chuyển object thành chuỗi JSON
+
+      // Bước 3: Lưu chuỗi JSON vào localStorage
+      // - Dùng localStorage.setItem()
+      // - Key là STORAGE_KEY đã khai báo trước đó
+    },
+    handleEnded: function () {
+      // B1: Kiểm tra trạng thái repeat
+      // - Nếu repeat đang bật (this.isRepeat = true)
+      //   → Gọi this.playSong() để phát lại bài hiện tại
+
+      // B2: Kiểm tra trạng thái random
+      // - Nếu random bật (this.isRandom = true)
+      //   → Gọi this.playRandomSong()
+
+      // B3: Mặc định (cả repeat & random đều tắt)
+      // - Gọi this.nextSong() → chuyển sang bài tiếp theo
+      // - Gọi this.playSong() để phát bài mới
+
+      // Bổ sung: updateActiveSong() để cập nhật giao diện
+    },
+    function displayTimeInfo() {
+      // B1: Kiểm tra nếu có thông tin duration từ audio
+      // B2: Lấy thời gian hiện tại (audio.currentTime) và format sang mm:ss
+      // B3: Lấy tổng thời lượng bài hát (audio.duration) và format sang mm:ss
+      // B4: Cập nhật 2 phần tử DOM hiển thị thời gian (currentTime & duration)
+    },
+    initTimeDisplayElements: function() {
+      // B1: Chuẩn bị vị trí chèn
+      // - Xác định vị trí trong DOM mà bạn muốn chèn 2 phần tử thời gian.
+      // - Gợi ý: đặt trước hoặc dưới thanh #progress.
+      // - Truy cập phần tử cha chứa thanh progress (ví dụ: .dashboard).
+      // - Lấy phần tử cha của progress (thường là .dashboard)
+
+      // B2: Tạo phần tử hiển thị thời gian
+      // - Tạo 2 phần tử DOM (ví dụ: thẻ <span> hoặc <div>) để chứa:
+      // - Thời gian hiện tại (currentTimeElement)
+      // - Tổng thời lượng (durationElement)
+      // - Gán class cho chúng, ví dụ: .time-current, .time-duration
+      // - Điều này giúp bạn dễ chọn và style sau này.
+
+      // B3: Đặt nội dung ban đầu
+      // - Gán giá trị mặc định cho 2 phần tử là "00:00"
+      // - Vì khi vừa vào app, chưa phát bài hát nào cả.
+      
+      // B4: Tạo container nếu cần
+      // - Nếu muốn căn chỉnh đẹp, có thể tạo 1 div cha để chứa cả 2 phần tử thời gian.
+      // - Gán class ví dụ .time-info để dễ style (flex hoặc grid).
+      // - Trong container này, đặt currentTime bên trái và duration bên phải.
+
+      // B5: Chèn vào DOM
+      // - Chèn container (hoặc 2 thẻ thời gian) vào DOM
+      // - Nên đặt ngay trước hoặc sau thanh #progress để người dùng dễ nhìn.
+
+      // B6: Gán vào biến toàn cục nếu cần dùng
+      // - Gán 2 phần tử vào các biến toàn cục của app, ví dụ:
+      // - this.currentTimeElement = ...
+      // - this.durationElement = ...
+      // - Sau đó bạn có thể dùng chúng trong các hàm khác như displayTimeInfo() và handleLoadedMetadata() để cập nhật thời gian.
+    },
+    formatTime(seconds): function() {
+      // B1: Làm tròn số giây xuống để tránh số lẻ (dùng Math.floor)
+      // B2: Tính số phút bằng cách chia tổng giây cho 60
+      // B3: Tính số giây còn lại bằng cách lấy phần dư sau chia 60
+      // B4: Nếu phút < 10, thêm số 0 phía trước (padStart hoặc tự nối chuỗi)
+      // B5: Nếu giây < 10, thêm số 0 phía trước (padStart hoặc tự nối chuỗi)
+      // B6: Trả về chuỗi định dạng "mm:ss"
+    },
+    handleLoadedMetadata: function () {
+      // B1: Lấy tổng thời lượng bài hát từ audio (audio.duration)
+
+      // B2: Kiểm tra nếu duration tồn tại và là số hợp lệ
+
+      // B3: Gọi hàm formatTime(duration) để chuyển đổi sang định dạng "mm:ss"
+
+      // B4: Cập nhật chuỗi kết quả vào phần tử DOM hiển thị tổng thời gian (this.durationElement)
+    },
+    initVolumeElements: function () {
+      // B1: Xác định vị trí cần gắn volume control (gần cụm nút control)
+    
+      // B2: Tạo phần tử container chứa volume control (ví dụ div.volume-control)
+    
+      // B3: Tạo phần tử icon loa (ví dụ i hoặc button), gán class tương ứng (mute/unmute)
+    
+      // B4: Tạo phần tử input range (type="range") làm thanh volume, set min=0, max=100, step=1
+    
+      // B5: Gán giá trị mặc định cho thanh volume (ví dụ 50 hoặc từ config nếu có)
+    
+      // B6: Chèn icon và thanh volume vào container
+    
+      // B7: Gắn container volume-control vào DOM (gần cụm control buttons)
+    
+      // B8: Lưu tham chiếu DOM element icon và thanh volume vào thuộc tính app để dùng về sau
+    }
+    function handleVolumeControl() {
+      // B1: Đăng ký sự kiện input cho thanh volume
+    
+      // B2: Khi user kéo thanh volume, lấy giá trị mới (0-100)
+    
+      // B3: Chuyển giá trị về dải 0.0 - 1.0 và gán cho this.audio.volume
+    
+      // B4: Nếu volume > 0 và đang mute, bật lại âm thanh (unmute)
+    
+      // B5: Cập nhật trạng thái icon loa (mute/unmute) tương ứng
+    
+      // B6: Gọi hàm saveVolumeConfig() lưu lại volume và trạng thái mute
+    
+      // B7: Đăng ký sự kiện click cho icon loa
+    
+      // B8: Khi click icon loa, toggle trạng thái mute/unmute
+    
+      // B9: Nếu mute, lưu âm lượng hiện tại để khi unmute có thể phục hồi
+    
+      // B10: Cập nhật thanh volume (có thể về 0 khi mute)
+    
+      // B11: Cập nhật icon loa hiển thị đúng
+    
+      // B12: Gọi saveVolumeConfig() để lưu lại trạng thái
+    },
+    function saveVolumeConfig() {
+      // B1: Tạo object chứa volume (0.0 - 1.0) và trạng thái mute (boolean)
+    
+      // B2: Chuyển object thành JSON string
+    
+      // B3: Lưu chuỗi vào localStorage (cùng key với config chung hoặc key riêng)
+    },
+    loadVolumeConfig: function () {
+      // B1: Lấy dữ liệu từ localStorage (theo key đã lưu)
+    
+      // B2: Nếu có dữ liệu, parse JSON để lấy volume và trạng thái mute
+    
+      // B3: Gán giá trị volume cho this.audio.volume
+    
+      // B4: Cập nhật thanh volume với giá trị vừa load
+    
+      // B5: Cập nhật trạng thái mute/unmute cho audio và icon loa
+    
+      // B6: Nếu không có dữ liệu, gán giá trị volume mặc định (ví dụ 0.5) và unmute
+    }
