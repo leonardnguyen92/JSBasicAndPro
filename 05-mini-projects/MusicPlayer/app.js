@@ -2,14 +2,16 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const STORAGE_KEY = "MP3_PLAYER_CONFIG";
 const VOLUME_KEY = "MP3_VOLUME_CONFIG";
+const THEME_KEY = "MP3_DARK_MODE";
 
 const app = {
     currentIndex: 0,
     isPlaying: false,
     isRandom: false,
     isRepeat: false,
-    h2HeaderElement: $("header h2"),
+    isDarkMode: false,
 
+    h2HeaderElement: $("header h2"),
     cdThumb: $(".cd-thumb"),
     audio: document.getElementById("audio"),
     playBtn: $(".btn-toggle-play"),
@@ -84,6 +86,33 @@ const app = {
                 return _this.songs[_this.currentIndex];
             }
         })
+    },
+    toggleDarkMode: function () {
+        this.isDarkMode = !this.isDarkMode;
+        document.body.classList.toggle("dark", this.isDarkMode);
+        localStorage.setItem(THEME_KEY, JSON.stringify(this.isDarkMode));
+        // Đổi icon
+        if (this.isDarkMode) {
+            this.darkToggleIcon.classList.remove("fa-moon");
+            this.darkToggleIcon.classList.add("fa-sun");
+        } else {
+            this.darkToggleIcon.classList.remove("fa-sun");
+            this.darkToggleIcon.classList.add("fa-moon");
+        }
+    },
+
+    loadDarkMode: function () {
+        const stored = localStorage.getItem(THEME_KEY);
+        const isDark = stored ? JSON.parse(stored) : false;
+        this.isDarkMode = isDark;
+        if (this.isDarkMode) {
+            document.body.classList.add("dark");
+        }
+        // Cập nhật icon khi load
+        if (this.darkToggleIcon) {
+            this.darkToggleIcon.classList.toggle("fa-sun", this.isDarkMode);
+            this.darkToggleIcon.classList.toggle("fa-moon", !this.isDarkMode);
+        }
     },
     render: function () {
         const htmls = this.songs.map(song => {
@@ -357,6 +386,13 @@ const app = {
         this.handlePlaylistClick();
         this.audio.onloadedmetadata = this.handleLoadedMetadata.bind(this);
         this.handleVolumeControl();
+        const darkToggle = $(".darkmode-toggle");
+        if (darkToggle) {
+            this.darkToggleIcon = darkToggle.querySelector("i"); // <-- Gán icon vào biến
+            darkToggle.onclick = () => {
+                this.toggleDarkMode();
+            }
+        }
     },
     saveConfig: function () {
         const config = {
@@ -377,6 +413,7 @@ const app = {
         this.initVolumeElements();
         this.loadVolumeConfig();
         this.handleEvents();
+        this.loadDarkMode();
     }
 }
 

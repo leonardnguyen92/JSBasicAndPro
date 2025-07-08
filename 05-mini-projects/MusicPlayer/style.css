@@ -10,12 +10,22 @@
 }
 
 body {
-    background-color: #f5f5f5;
+    background-color: white;
+    color: black;
 }
 
 html {
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    /* cách đều nhau */
+    position: relative;
+    align-items: center;
+    /* canh giữa theo chiều dọc nếu cần */
 }
 
 .player {
@@ -287,4 +297,58 @@ header h2 {
 .volume-control input[type="range"]::-moz-range-thumb:hover {
     background: #a11537;
     /* màu đậm hơn */
+}
+
+/* CSS dark mode */
+body.dark {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark .song {
+    background-color: #1e1e1e;
+}
+
+body.dark .control,
+body.dark .playlist {
+    background-color: #1a1a1a;
+}
+
+/* Đặt darkmode-toggle ở góc phải */
+.darkmode-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+body.dark .dashboard {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+
+body.dark header h2 {
+    color: white;
+}
+
+body.dark header h4 {
+    color: var(--primary-color);
+    /* Giữ màu nổi bật hoặc chuyển sang màu sáng */
+}
+
+body.dark .cd-thumb {
+    background-color: #222;
+    /* nếu không có hình ảnh */
+}
+
+body.dark .song {
+    background-color: #1e1e1e;
+}
+
+body.dark .song .title {
+    color: white;
+}
+
+body.dark .song .author {
+    color: #ccc;
 }
